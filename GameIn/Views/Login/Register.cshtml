@@ -6,18 +6,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Registration</h2>
-
-
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>@Resources.Resources.Username</legend>
+        <legend>@Resources.Resources.Register</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
+            @Html.LabelFor(model => model.Email, Resources.Resources.Email)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Email)
@@ -25,7 +22,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.UserName)
+            @Html.LabelFor(model => model.UserName, Resources.Resources.Username)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.UserName)
@@ -33,23 +30,15 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
+            @Html.LabelFor(model => model.Password, Resources.Resources.Password)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Password)
+            @Html.PasswordFor(model => model.Password)
             @Html.ValidationMessageFor(model => model.Password)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Type)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Type)
-            @Html.ValidationMessageFor(model => model.Type)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
+            @Html.LabelFor(model => model.Name, Resources.Resources.Name)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Name)
@@ -57,7 +46,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Gender)
+            @Html.LabelFor(model => model.Gender, Resources.Resources.Gender)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Gender)
@@ -65,15 +54,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Status)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Status)
-            @Html.ValidationMessageFor(model => model.Status)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Country)
+            @Html.LabelFor(model => model.Country, Resources.Resources.Country)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Country)
@@ -81,7 +62,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.State)
+            @Html.LabelFor(model => model.State, Resources.Resources.State)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.State)
@@ -89,7 +70,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Region)
+            @Html.LabelFor(model => model.Region, Resources.Resources.Region)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Region)
@@ -97,7 +78,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.SubRegion)
+            @Html.LabelFor(model => model.SubRegion, Resources.Resources.SubRegion)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.SubRegion)
@@ -105,53 +86,12 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Lang)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Lang)
-            @Html.ValidationMessageFor(model => model.Lang)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TimeZone)
+            @Html.LabelFor(model => model.TimeZone, Resources.Resources.TimeZone)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.TimeZone)
             @Html.ValidationMessageFor(model => model.TimeZone)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CreateDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CreateDate)
-            @Html.ValidationMessageFor(model => model.CreateDate)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LastLogin)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.LastLogin)
-            @Html.ValidationMessageFor(model => model.LastLogin)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LastIP)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.LastIP)
-            @Html.ValidationMessageFor(model => model.LastIP)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LastUserAgent)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.LastUserAgent)
-            @Html.ValidationMessageFor(model => model.LastUserAgent)
-        </div>
-
         <p>
             <input type="submit" value="Create" />
         </p>

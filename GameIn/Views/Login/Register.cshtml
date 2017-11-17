@@ -2,20 +2,19 @@
 
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = Resources.Resources.Register;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Registration</h2>
 
-@Res.Resources.Username
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>User</legend>
+        <legend>@Resources.Resources.Username</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Email)

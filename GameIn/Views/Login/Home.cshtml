@@ -1,11 +1,11 @@
 ﻿@{
-    ViewBag.Title = "Home";
+    ViewBag.Title = Resources.Resources.Home;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Home</h2>
+<h2>@Resources.Resources.Home</h2>
 
 
 <li>
-    @Html.ActionLink("Register", "Register", "Login",null, null)
+    @Html.ActionLink(Resources.Resources.Register, "Register", "Login", null, null)
 </li>

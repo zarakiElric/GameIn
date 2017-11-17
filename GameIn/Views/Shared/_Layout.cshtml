@@ -8,8 +8,21 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @RenderBody()
-
+    <table style="width:100%;">
+    <tr>
+    <td align="right">
+        <div style="margin-right:5%;">
+            @Html.ActionLink(Resources.Resources.English, HttpContext.Current.Request.RequestContext.RouteData.Values["Action"].ToString(), HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString(), new { lang = "en" }, "" )
+            / @Html.ActionLink(Resources.Resources.Spanish, HttpContext.Current.Request.RequestContext.RouteData.Values["Action"].ToString(), HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString(), new { lang = "es" }, "")
+        </div>
+    </td>
+    </tr>
+    <tr>
+    <td>
+        @RenderBody()
+    </td>
+    </tr>
+    </table>
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
 </body>

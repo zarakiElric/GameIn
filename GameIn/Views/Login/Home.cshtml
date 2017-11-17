@@ -7,5 +7,9 @@
 
 
 <li>
-    @Html.ActionLink(Resources.Resources.Register, "Register", "Login", null, null)
+    @Html.ActionLink(Resources.Resources.Register, "Register", "Login",
+    new {
+            lang = HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
+            ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : ""
+        } , null)
 </li>

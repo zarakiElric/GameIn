@@ -1,0 +1,164 @@
+﻿@model GameIn.User
+
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Registration</h2>
+
+@Res.Resources.Username
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>User</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Type)
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gender)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Gender)
+            @Html.ValidationMessageFor(model => model.Gender)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Country)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Country)
+            @Html.ValidationMessageFor(model => model.Country)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.State)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.State)
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Region)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Region)
+            @Html.ValidationMessageFor(model => model.Region)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SubRegion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SubRegion)
+            @Html.ValidationMessageFor(model => model.SubRegion)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Lang)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Lang)
+            @Html.ValidationMessageFor(model => model.Lang)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TimeZone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TimeZone)
+            @Html.ValidationMessageFor(model => model.TimeZone)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateDate)
+            @Html.ValidationMessageFor(model => model.CreateDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastLogin)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastLogin)
+            @Html.ValidationMessageFor(model => model.LastLogin)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastIP)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastIP)
+            @Html.ValidationMessageFor(model => model.LastIP)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastUserAgent)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastUserAgent)
+            @Html.ValidationMessageFor(model => model.LastUserAgent)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to Login", "Home")
+</div>

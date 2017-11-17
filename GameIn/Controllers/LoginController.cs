@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading;
 
 namespace GameIn.Controllers
 {
@@ -12,6 +13,19 @@ namespace GameIn.Controllers
         // GET: /Login/
 
         public ActionResult Home()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Register()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(FormCollection collection)
         {
             return View();
         }

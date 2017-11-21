@@ -26,5 +26,6 @@ namespace GameIn.Models
         }
     
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Countries> Countries { get; set; }
     }
 }

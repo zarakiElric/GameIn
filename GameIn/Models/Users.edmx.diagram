@@ -7,6 +7,9 @@
       <Diagram DiagramId="02ada4e56a0d429ba53d2ee4a03ff6e6" Name="Diagram1" ZoomLevel="96">
         <EntityTypeShape EntityType="gameinUsers.Users" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
+      <Diagram DiagramId="bc36bdd277224b05848e1df14f4cc0cc" Name="Diagram2" >
+        <EntityTypeShape EntityType="gameinUsers.Countries" Width="1.5" PointX="0.75" PointY="0.75" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

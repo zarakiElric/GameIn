@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
+    <fieldset class="fs_container">
         <legend>@Resources.Resources.Register</legend>
 
         <div class="editor-label">
@@ -49,45 +49,37 @@
             @Html.LabelFor(model => model.Gender, Resources.Resources.Gender)
         </div>
         <div class="editor-field">
-            @Html.DropDownList(
-                                Resources.Resources.Gender,
-                                new SelectList
-                                (
-                                    new[]
-                                    {
-                                        new { Value = "true", Text = @Resources.Resources.Male },
-                                        new { Value = "false", Text = @Resources.Resources.Female },
-                                    },
-                                    "Value",
-                                    "Text",
-                                    Model
-                                )
-                            )
+            @Html.DropDownList( Resources.Resources.Gender, new SelectList ( new[] 
+                    {
+                        new { Value = "true", Text = @Resources.Resources.Male },
+                        new { Value = "false", Text = @Resources.Resources.Female },
+                    }, "Value","Text", Model)
+                    )
 
             @Html.ValidationMessageFor(model => model.Gender)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Country, Resources.Resources.Country)
+            @Html.LabelFor(model => model.Countries, Resources.Resources.Country)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Country)
-            @Html.ValidationMessageFor(model => model.Country)
+            @Html.DropDownListFor(model => model.CountryID, new SelectList(ViewBag.CountriesList, "Value", "Text"), Resources.Resources.Select,
+                        new { @class = "form-control", @onchange = "FillStates()" })
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.State, Resources.Resources.State)
+            @Html.LabelFor(model => model.States, Resources.Resources.State)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.State)
-            @Html.ValidationMessageFor(model => model.State)
+            @Html.DropDownList("StatesList", Resources.Resources.Select)
+            @Html.ValidationMessageFor(model => model.States)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Region, Resources.Resources.Region)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Region)
+            @Html.DropDownList("CitiesList", Resources.Resources.Select)
             @Html.ValidationMessageFor(model => model.Region)
         </div>
 
@@ -111,7 +103,8 @@
         </p>
     </fieldset>
 }
-
+@Html.Hidden("hf_lang", HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
+            ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : "")
 <div>
     @Html.ActionLink(Resources.Resources.BackLogin, "Home", "Login",
     new
@@ -120,3 +113,57 @@
             ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : ""
     }, null)
 </div>
+
+@section Scripts 
+{
+<script>
+$("#StatesList").change(FillCities);
+function FillStates()
+{
+    var country = $('#CountryID').val();
+    var selectedLang = document.getElementById('hf_lang').value;
+    $.ajax({
+    url: '/Login/GetStates',
+    type: "GET",
+    dataType: "JSON",
+    data: {
+            lang: selectedLang, countryid: country
+    },
+    success: function (data) {
+        $("#StatesList").html(""); // clear before appending new list
+        $.each(data, function (i, state) {
+            $("#StatesList").append(
+                $('<option></option>').val(state.StateID).html(state.Name));
+        });
+    },
+    error: function ajaxError(response) {
+        alert(response.status + ' ' + response.statusText);
+    }
+    });
+}
+
+function FillCities()
+{
+    var state = $('#StatesList').val();
+    var selectedLang = document.getElementById('hf_lang').value;
+    $.ajax({
+        url: '/Login/GetCities',
+        type: "GET",
+        dataType: "JSON",
+        data: {
+            lang: selectedLang, stateid: state
+        },
+        success: function (data) {
+            $("#CitiesList").html(""); // clear before appending new list
+            $.each(data, function (i, city) {
+                $("#CitiesList").append(
+                    $('<option></option>').val(city.CityID).html(city.Name));
+            });
+        },
+        error: function ajaxError(response) {
+            alert(response.status + ' ' + response.statusText);
+        }
+    });
+}
+</script>
+}

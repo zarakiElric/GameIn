@@ -159,6 +159,9 @@
   <data name="Register" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="Select" xml:space="preserve">
+    <value>-- Select --</value>
+  </data>
   <data name="Spanish" xml:space="preserve">
     <value>Español</value>
   </data>

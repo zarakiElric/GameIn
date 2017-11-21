@@ -4,8 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ea0f9e7c106c4221a8fb69312bbfc5af" Name="Diagram1">
-        <EntityTypeShape EntityType="gameinModel.Countries" Width="4.25" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="1c80757ccbe141b5b33c2c384cbc2037" Name="Diagram1">
+        <EntityTypeShape EntityType="gameinModel.Countries" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gameinModel.Cities" Width="1.5" PointX="5.625" PointY="0.75" />
+        <EntityTypeShape EntityType="gameinModel.States" Width="1.5" PointX="3.25" PointY="0.75" />
+        <AssociationConnector Association="gameinModel.StatesCountries" />
+        <AssociationConnector Association="gameinModel.CitiesStates" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,19 +12,12 @@ namespace GameIn.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Countries
+    public partial class Cities
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Countries()
-        {
-            this.States = new HashSet<States>();
-        }
-    
         public int ID { get; set; }
-        public string Sortname { get; set; }
         public string Name { get; set; }
+        public int StateID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<States> States { get; set; }
+        public virtual States States { get; set; }
     }
 }

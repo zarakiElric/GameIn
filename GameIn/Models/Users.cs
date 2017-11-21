@@ -11,7 +11,8 @@ namespace GameIn.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web.Mvc;
+
     public partial class Users
     {
         public long ID { get; set; }
@@ -22,8 +23,10 @@ namespace GameIn.Models
         public string Name { get; set; }
         public bool Gender { get; set; }
         public bool Status { get; set; }
-        public byte Country { get; set; }
-        public Nullable<byte> State { get; set; }
+        public SelectListItem Countries { get; set; }
+        public int? CountryID { get; set; }
+        public SelectListItem States { get; set; }
+        public int? StateID { get; set; }
         public Nullable<byte> Region { get; set; }
         public string SubRegion { get; set; }
         public byte Lang { get; set; }

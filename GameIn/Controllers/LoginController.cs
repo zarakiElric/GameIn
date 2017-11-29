@@ -18,6 +18,7 @@ namespace GameIn.Controllers
 
         public ActionResult Home(string lang)
         {
+
             ChangeLang(lang);
             return View();
         }
@@ -129,7 +130,23 @@ namespace GameIn.Controllers
                 Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-MX");
             }
+            SetTheme();
         }
+
+        protected void SetTheme()
+        {
+            if (Session["theme"] != null && Session["theme"].ToString() != string.Empty)
+            {
+                ViewBag.theme = Session["theme"].ToString();
+            }
+            else
+            {
+                ViewBag.theme = "blue";
+                Session["theme"] = "blue";
+            }
+        }
+
+
 
     }
 }

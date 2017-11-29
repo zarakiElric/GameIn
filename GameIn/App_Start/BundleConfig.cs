@@ -24,6 +24,8 @@ namespace GameIn
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/blue/css").Include("~/Content/themes/blue.css"));
+            bundles.Add(new StyleBundle("~/Content/red/css").Include("~/Content/themes/red.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

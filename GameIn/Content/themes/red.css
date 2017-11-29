@@ -9,15 +9,15 @@ header, footer, nav, section {
     display: block;
 }
 
-.editor-field {float:right;padding-right:30%;}
-
+.fs_container {overflow: hidden;}
+.fs_container div{float:left;}
 /* Styles for basic forms
 -----------------------------------------------------------*/
 fieldset {
     border: 1px solid #ddd;
     padding: 0 1.4em 1.4em 1.4em;
     margin: 0 0 1.5em 0;
-    background: #c6cdff;
+    background:#f00;
 }
 
 legend {

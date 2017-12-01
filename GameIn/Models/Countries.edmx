@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="gameinModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="gameinModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cities">
           <Key>
             <PropertyRef Name="ID" />
@@ -29,15 +29,34 @@
           <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CountryID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="TimeZones">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UTCOffset" Type="smallint" Nullable="false" />
+          <Property Name="WindowsID" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityContainer Name="gameinModelStoreContainer">
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeZones" EntityType="Self.TimeZones" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="gameinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StateID" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Countries">
           <Key>
             <PropertyRef Name="ID" />
@@ -45,70 +64,45 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Sortname" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="States" Relationship="gameinModel.StatesCountries" FromRole="Countries" ToRole="States" />
-        </EntityType>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Countries" EntityType="Self.Countries" />
-          <EntitySet Name="Cities" EntityType="gameinModel.Cities" />
-          <EntitySet Name="States" EntityType="gameinModel.States" />
-          <AssociationSet Name="StatesCountries" Association="gameinModel.StatesCountries">
-            <End Role="States" EntitySet="States" />
-            <End Role="Countries" EntitySet="Countries" />
-          </AssociationSet>
-          <AssociationSet Name="CitiesStates" Association="gameinModel.CitiesStates">
-            <End Role="Cities" EntitySet="Cities" />
-            <End Role="States" EntitySet="States" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Cities">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="StateID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="States" Relationship="gameinModel.CitiesStates" FromRole="Cities" ToRole="States" />
         </EntityType>
         <EntityType Name="States">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CountryID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Countries" Relationship="gameinModel.StatesCountries" FromRole="States" ToRole="Countries" />
-          <NavigationProperty Name="Cities" Relationship="gameinModel.CitiesStates" FromRole="States" ToRole="Cities" />
         </EntityType>
-        <Association Name="StatesCountries">
-          <End Type="gameinModel.States" Role="States" Multiplicity="*" />
-          <End Type="gameinModel.Countries" Role="Countries" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Countries">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="States">
-              <PropertyRef Name="CountryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CitiesStates">
-          <End Type="gameinModel.Cities" Role="Cities" Multiplicity="*" />
-          <End Type="gameinModel.States" Role="States" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="States">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Cities">
-              <PropertyRef Name="StateID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="TimeZones">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UTCOffset" Type="Int16" Nullable="false" />
+          <Property Name="WindowsID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="gameinEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cities" EntityType="Self.Cities" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" />
+          <EntitySet Name="States" EntityType="Self.States" />
+          <EntitySet Name="TimeZones" EntityType="Self.TimeZones" />
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="gameinModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="gameinModelStoreContainer" CdmEntityContainer="gameinEntities">
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="gameinModel.Cities">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Countries">
             <EntityTypeMapping TypeName="gameinModel.Countries">
               <MappingFragment StoreEntitySet="Countries">
@@ -118,21 +112,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Cities">
-            <EntityTypeMapping TypeName="gameinModel.Cities">
-              <MappingFragment StoreEntitySet="Cities">
-                <ScalarProperty Name="StateID" ColumnName="StateID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="States">
             <EntityTypeMapping TypeName="gameinModel.States">
               <MappingFragment StoreEntitySet="States">
-                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeZones">
+            <EntityTypeMapping TypeName="gameinModel.TimeZones">
+              <MappingFragment StoreEntitySet="TimeZones">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UTCOffset" ColumnName="UTCOffset" />
+                <ScalarProperty Name="WindowsID" ColumnName="WindowsID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

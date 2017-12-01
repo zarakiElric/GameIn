@@ -9,7 +9,15 @@ header, footer, nav, section {
     display: block;
 }
 
-.editor-field {float:right;padding-right:30%;}
+.divRow {
+    display:table-row;
+    padding:10px;
+}
+
+.divRow div {
+    display: table-cell;
+    padding: 10px;
+}
 
 /* Styles for basic forms
 -----------------------------------------------------------*/
@@ -18,6 +26,7 @@ fieldset {
     padding: 0 1.4em 1.4em 1.4em;
     margin: 0 0 1.5em 0;
     background: #c6cdff;
+    display:inline-block;
 }
 
 legend {

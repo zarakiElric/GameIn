@@ -168,6 +168,9 @@
     <Compile Include="Models\States.cs">
       <DependentUpon>Countries.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TimeZones.cs">
+      <DependentUpon>Countries.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Users.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

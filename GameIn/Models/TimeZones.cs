@@ -12,10 +12,11 @@ namespace GameIn.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Cities
+    public partial class TimeZones
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int StateID { get; set; }
+        public short UTCOffset { get; set; }
+        public string WindowsID { get; set; }
     }
 }

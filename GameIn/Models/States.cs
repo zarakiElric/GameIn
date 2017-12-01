@@ -14,18 +14,8 @@ namespace GameIn.Models
     
     public partial class States
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public States()
-        {
-            this.Cities = new HashSet<Cities>();
-        }
-    
         public int ID { get; set; }
         public string Name { get; set; }
         public int CountryID { get; set; }
-    
-        public virtual Countries Countries { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cities> Cities { get; set; }
     }
 }

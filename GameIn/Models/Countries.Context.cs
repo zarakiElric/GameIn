@@ -25,8 +25,9 @@ namespace GameIn.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Countries> Countries { get; set; }
         public virtual DbSet<Cities> Cities { get; set; }
+        public virtual DbSet<Countries> Countries { get; set; }
         public virtual DbSet<States> States { get; set; }
+        public virtual DbSet<TimeZones> TimeZones { get; set; }
     }
 }

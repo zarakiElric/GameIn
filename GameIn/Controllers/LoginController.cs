@@ -13,9 +13,18 @@ namespace GameIn.Controllers
     {
 
         CountryEntities gEntity = new CountryEntities();
-        //
-        // GET: /Login/
+        List<SelectListItem> EmptyList = new List<SelectListItem>();
+        SelectListItem emptyitem = new SelectListItem { Value = null, Text = " "};
 
+        #region Views
+
+        /// <summary>
+        /// Default view from application
+        /// </summary>
+        /// <param name="lang">string</param>
+        /// <returns>ActionResult</returns>
+        /// Developer: Dan Palacios
+        /// Date: 30/11/17
         public ActionResult Home(string lang)
         {
 
@@ -23,7 +32,13 @@ namespace GameIn.Controllers
             return View();
         }
 
-
+        /// <summary>
+        /// Get-View register for application
+        /// </summary>
+        /// <param name="lang">string</param>
+        /// <returns>ActionResult</returns>
+        /// Developer: Dan Palacios
+        /// Date: 30/11/17
         [HttpGet]
         public ActionResult Register(string lang)
         {
@@ -31,13 +46,38 @@ namespace GameIn.Controllers
 
 
             ViewBag.CountriesList = GetCountries();
-            ViewBag.StatesList = GetStates();
-            ViewBag.CitiesList = GetCities();
+            EmptyList.Add(emptyitem);
+            ViewBag.StatesList = EmptyList;
+            ViewBag.CitiesList = EmptyList;
 
             return View();
         }
 
+        /// <summary>
+        /// Post-view register for application
+        /// </summary>
+        /// <param name="collection">FormCollection</param>
+        /// <param name="lang">string</param>
+        /// <returns>ActionResult</returns>
+        /// Developer: Dan Palacios
+        /// Date: 30/11/17
+        [HttpPost]
+        public ActionResult Register(FormCollection collection, string lang)
+        {
+            ChangeLang(lang);
+            return View();
+        }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Get countries from database
+        /// </summary>
+        /// <returns>IEnumerable<SelectListItem></returns>
+        /// Developer: Dan Palacios
+        /// Date: 30/11/17
         private IEnumerable<SelectListItem> GetCountries()
         {
             List<SelectListItem> CountryListItem = new List<SelectListItem>();
@@ -54,38 +94,43 @@ namespace GameIn.Controllers
                     };
                     CountryListItem.Add(newitem);
                 }
+
+                ViewBag.TimeZonesList = GetTimeZones();
             }
 
             return CountryListItem;
         }
 
-        private IEnumerable<SelectListItem> GetStates()
+        /// <summary>
+        /// Get time zones from database
+        /// </summary>
+        /// <returns>IEnumerable<SelectListItem></returns>
+        /// Developer: Dan Palacios
+        /// Date: 30/11/17
+        private IEnumerable<SelectListItem> GetTimeZones()
         {
-            List<SelectListItem> StatesListItem = new List<SelectListItem>();
-            SelectListItem newitem = new SelectListItem
+            List<SelectListItem> TimeZonesListItem = new List<SelectListItem>();
+            foreach (TimeZones TimeZoneInfo in gEntity.TimeZones)
             {
-                Value = null,
-                Text = " "
-            };
-            StatesListItem.Add(newitem);
+                SelectListItem newitem = new SelectListItem
+                {
+                    Text = TimeZoneInfo.Name,
+                    Value = TimeZoneInfo.ID.ToString()
+                };
+                TimeZonesListItem.Add(newitem);
+            }
 
-            return StatesListItem;
+            return TimeZonesListItem;
         }
 
-        private IEnumerable<SelectListItem> GetCities()
-        {
-            List<SelectListItem> CitiesListItem = new List<SelectListItem>();
-            SelectListItem newitem = new SelectListItem
-            {
-                Value = null,
-                Text = " "
-            };
-            CitiesListItem.Add(newitem);
-
-            return CitiesListItem;
-        }
-
-
+        /// <summary>
+        /// Get states from database according to the country id
+        /// </summary>
+        /// <param name="lang">string</param>
+        /// <param name="countryid">int</param>
+        /// <returns>ActionResult</returns>
+        /// Developer: Dan Palacios
+        /// Date: 30/11/17
         [HttpGet]
         public ActionResult GetStates(string lang, int countryid)
         {
@@ -99,6 +144,14 @@ namespace GameIn.Controllers
             }
         }
 
+        /// <summary>
+        /// Get cities from database according to the state id
+        /// </summary>
+        /// <param name="lang">string</param>
+        /// <param name="stateid">int</param>
+        /// <returns>ActionResult</returns>
+        /// Developer: Dan Palacios
+        /// Date: 30/11/17
         [HttpGet]
         public ActionResult GetCities(string lang, int stateid)
         {
@@ -112,15 +165,12 @@ namespace GameIn.Controllers
             }
         }
 
-
-        [HttpPost]
-        public ActionResult Register(FormCollection collection, string lang)
-        {
-            ChangeLang(lang);
-            return View();
-        }
-
-
+        /// <summary>
+        /// Change current lang of application
+        /// </summary>
+        /// <param name="lang">string</param>
+        /// Developer: Dan Palacios
+        /// Date: 30/11/17
         protected void ChangeLang(string lang)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
@@ -133,6 +183,11 @@ namespace GameIn.Controllers
             SetTheme();
         }
 
+        /// <summary>
+        /// Set theme for current application
+        /// </summary>
+        /// Developer: Dan Palacios
+        /// Date: 30/11/17
         protected void SetTheme()
         {
             if (Session["theme"] != null && Session["theme"].ToString() != string.Empty)
@@ -146,7 +201,7 @@ namespace GameIn.Controllers
             }
         }
 
-
+        #endregion
 
     }
 }

@@ -159,6 +159,15 @@
   <data name="Register" xml:space="preserve">
     <value>Registro</value>
   </data>
+  <data name="RegistrationComplete" xml:space="preserve">
+    <value>Usuario registrado con exito.</value>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>{0} es un campo requerido.</value>
+  </data>
+  <data name="RequiredFieldMissing" xml:space="preserve">
+    <value>Uno o varios campos obligatorios estan vacios.</value>
+  </data>
   <data name="Select" xml:space="preserve">
     <value>-- Seleccionar --</value>
   </data>

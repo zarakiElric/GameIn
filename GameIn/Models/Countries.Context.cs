@@ -13,10 +13,10 @@ namespace GameIn.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CountryEntities : DbContext
+    public partial class gameinEntities : DbContext
     {
-        public CountryEntities()
-            : base("name=CountryEntities")
+        public gameinEntities()
+            : base("name=gameinEntities")
         {
         }
     

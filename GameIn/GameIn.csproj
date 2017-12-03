@@ -189,6 +189,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Users.tt</DependentUpon>
     </Compile>
+    <Compile Include="PluggableControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@ namespace GameIn.Controllers
     public class LoginController : Controller
     {
 
-        CountryEntities gEntity = new CountryEntities();
+        gameinEntities gEntity = new gameinEntities();
         List<SelectListItem> EmptyList = new List<SelectListItem>();
         SelectListItem emptyitem = new SelectListItem { Value = null, Text = " "};
 
@@ -28,7 +28,6 @@ namespace GameIn.Controllers
         public ActionResult Home(string lang)
         {
 
-            ChangeLang(lang);
             return View();
         }
 
@@ -42,8 +41,6 @@ namespace GameIn.Controllers
         [HttpGet]
         public ActionResult Register(string lang)
         {
-            ChangeLang(lang);
-
 
             ViewBag.CountriesList = GetCountries();
             EmptyList.Add(emptyitem);
@@ -62,10 +59,73 @@ namespace GameIn.Controllers
         /// Developer: Dan Palacios
         /// Date: 30/11/17
         [HttpPost]
-        public ActionResult Register(FormCollection collection, string lang)
+        public ActionResult Register(FormCollection collection, Users users, string lang, string StatesList, string CitiesList)
         {
-            ChangeLang(lang);
-            return View();
+
+            if(ModelState.IsValid)
+            {
+                string test = users.UserName;
+
+                if (StatesList != string.Empty)
+                {
+                    users.StateID = Convert.ToInt32(StatesList);
+                }
+                if (CitiesList != string.Empty)
+                {
+                    users.Region = Convert.ToInt32(CitiesList);
+                }
+                return Content("Ty", "text/html");
+            }
+            else
+            {
+                ViewBag.CountriesList = GetCountries();
+                EmptyList.Add(emptyitem);
+                ViewBag.StatesList = EmptyList;
+                ViewBag.CitiesList = EmptyList;
+                return View();
+            }
+
+        }
+
+        /// <summary>
+        /// Registration of users
+        /// </summary>
+        /// <param name="collection">FormCollection</param>
+        /// <param name="users">Users</param>
+        /// <param name="lang">string</param>
+        /// <param name="StatesList">string</param>
+        /// <param name="CitiesList">string</param>
+        /// <returns>string</returns>
+        /// Developer: Dan Palacios
+        /// Date: 03/12/17
+        public string RegisterUser(FormCollection collection, Users NewUser, string lang, string StatesList, string CitiesList)
+        {
+            if (ModelState.IsValid)
+            {
+                string test = NewUser.UserName;
+
+                if (StatesList != string.Empty)
+                {
+                    NewUser.StateID = Convert.ToInt32(StatesList);
+                }
+                if (CitiesList != string.Empty)
+                {
+                    NewUser.Region = Convert.ToInt32(CitiesList);
+                }
+
+                //Add method to save changes
+
+                return App_GlobalResources.Resources.RegistrationComplete;
+            }
+            else
+            {
+                ViewBag.CountriesList = GetCountries();
+                EmptyList.Add(emptyitem);
+                ViewBag.StatesList = EmptyList;
+                ViewBag.CitiesList = EmptyList;
+                return App_GlobalResources.Resources.RequiredFieldMissing;
+            }
+
         }
 
         #endregion
@@ -134,7 +194,6 @@ namespace GameIn.Controllers
         [HttpGet]
         public ActionResult GetStates(string lang, int countryid)
         {
-            ChangeLang(lang);
             using (gEntity.Database.Connection)
             {
                 gEntity.Database.Connection.Open();
@@ -155,7 +214,6 @@ namespace GameIn.Controllers
         [HttpGet]
         public ActionResult GetCities(string lang, int stateid)
         {
-            ChangeLang(lang);
             using (gEntity.Database.Connection)
             {
                 gEntity.Database.Connection.Open();
@@ -165,41 +223,41 @@ namespace GameIn.Controllers
             }
         }
 
-        /// <summary>
-        /// Change current lang of application
-        /// </summary>
-        /// <param name="lang">string</param>
-        /// Developer: Dan Palacios
-        /// Date: 30/11/17
-        protected void ChangeLang(string lang)
-        {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-            if (lang == "es")
-            {
-                Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-MX");
-            }
-            SetTheme();
-        }
+        ///// <summary>
+        ///// Change current lang of application
+        ///// </summary>
+        ///// <param name="lang">string</param>
+        ///// Developer: Dan Palacios
+        ///// Date: 30/11/17
+        //protected void ChangeLang(string lang)
+        //{
+        //    Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+        //    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+        //    if (lang == "es")
+        //    {
+        //        Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
+        //        Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-MX");
+        //    }
+        //    SetTheme();
+        //}
 
-        /// <summary>
-        /// Set theme for current application
-        /// </summary>
-        /// Developer: Dan Palacios
-        /// Date: 30/11/17
-        protected void SetTheme()
-        {
-            if (Session["theme"] != null && Session["theme"].ToString() != string.Empty)
-            {
-                ViewBag.theme = Session["theme"].ToString();
-            }
-            else
-            {
-                ViewBag.theme = "blue";
-                Session["theme"] = "blue";
-            }
-        }
+        ///// <summary>
+        ///// Set theme for current application
+        ///// </summary>
+        ///// Developer: Dan Palacios
+        ///// Date: 30/11/17
+        //protected void SetTheme()
+        //{
+        //    if (Session["theme"] != null && Session["theme"].ToString() != string.Empty)
+        //    {
+        //        ViewBag.theme = Session["theme"].ToString();
+        //    }
+        //    else
+        //    {
+        //        ViewBag.theme = "blue";
+        //        Session["theme"] = "blue";
+        //    }
+        //}
 
         #endregion
 

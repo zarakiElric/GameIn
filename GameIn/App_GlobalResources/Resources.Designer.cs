@@ -187,6 +187,33 @@ namespace GameIn.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User registered successfully..
+        /// </summary>
+        public static string RegistrationComplete {
+            get {
+                return ResourceManager.GetString("RegistrationComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} is a required field..
+        /// </summary>
+        public static string RequiredField {
+            get {
+                return ResourceManager.GetString("RequiredField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One or multiple required fields are empty..
+        /// </summary>
+        public static string RequiredFieldMissing {
+            get {
+                return ResourceManager.GetString("RequiredFieldMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -- Select --.
         /// </summary>
         public static string Select {

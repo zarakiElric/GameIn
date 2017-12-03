@@ -6,16 +6,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm()) {
+@using (Ajax.BeginForm("RegisterUser", new AjaxOptions { UpdateTargetId = "updateME" }))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
+    <div id="updateME"></div>
     <fieldset class="fs_container">
         <legend>@Resources.Resources.Register</legend>
 
         <div class="divRow">
             <div class="editor-label">
-                @Html.LabelFor(model => model.Email, Resources.Resources.Email)
+                @Html.LabelFor(model => model.Email)
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.Email)
@@ -25,7 +26,7 @@
 
         <div class="divRow">
             <div class="editor-label">
-                @Html.LabelFor(model => model.UserName, Resources.Resources.Username)
+                @Html.LabelFor(model => model.UserName)
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.UserName)
@@ -35,7 +36,7 @@
 
         <div class="divRow">
             <div class="editor-label">
-                @Html.LabelFor(model => model.Password, Resources.Resources.Password)
+                @Html.LabelFor(model => model.Password)
             </div>
             <div class="editor-field">
                 @Html.PasswordFor(model => model.Password)
@@ -57,13 +58,13 @@
             <div class="editor-label">
                 @Html.LabelFor(model => model.Gender, Resources.Resources.Gender)
             </div>
-            <div class="editor-field">
+            <div class="editor-field-gender">
                 @Html.DropDownList(Resources.Resources.Gender, new SelectList(new[]
-                    {
-                        new { Value = "true", Text = @Resources.Resources.Male },
-                        new { Value = "false", Text = @Resources.Resources.Female },
-                    }, "Value", "Text", Model)
-                    )
+        {
+            new { Value = "true", Text = @Resources.Resources.Male },
+            new { Value = "false", Text = @Resources.Resources.Female },
+        }, "Value", "Text", Model)
+        )
 
                 @Html.ValidationMessageFor(model => model.Gender)
             </div>
@@ -76,7 +77,7 @@
             </div>
             <div class="editor-field">
                 @Html.DropDownListFor(model => model.CountryID, new SelectList(ViewBag.CountriesList, "Value", "Text"), Resources.Resources.Select,
-                        new { @class = "form-control", @onchange = "FillStates()" })
+             new { @class = "form-control", @onchange = "FillStates()" })
             </div>
         </div>
 
@@ -121,10 +122,12 @@
         </div>
 
         <p>
-            <input type="submit" value="@Resources.Resources.CreateAccount" />
+            <input id="btn_Register" type="submit" value="@Resources.Resources.CreateAccount" />
         </p>
     </fieldset>
 }
+
+
 @Html.Hidden("hf_lang", HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
             ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : "")
 <div>
@@ -139,6 +142,7 @@
 @section Scripts 
 {
 <script>
+
 $("#StatesList").change(FillCities);
 function FillStates()
 {
@@ -187,5 +191,7 @@ function FillCities()
         }
     });
 }
+
+
 </script>
 }

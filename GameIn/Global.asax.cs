@@ -22,6 +22,8 @@ namespace GameIn
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ControllerBuilder.Current.SetControllerFactory(new CustomPlugin.PluggableControllerFactory());
+            GlobalFilters.Filters.Add(new CustomPlugin.PluggableControllerFactory.MyPropertyActionFilter(), 0);
         }
     }
 }

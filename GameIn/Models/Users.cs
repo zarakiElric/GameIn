@@ -10,14 +10,27 @@
 namespace GameIn.Models
 {
     using System;
-    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+    using App_GlobalResources;
 
     public partial class Users
     {
         public long ID { get; set; }
+
+        [Display(ResourceType = typeof(Resources), Name = "Email")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredField",
+            ErrorMessageResourceType = typeof(Resources))]
         public string Email { get; set; }
+
+        [Display(ResourceType = typeof(Resources), Name = "Username")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredField",
+            ErrorMessageResourceType = typeof(Resources))]
         public string UserName { get; set; }
+
+        [Display(ResourceType = typeof(Resources), Name = "Password")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredField",
+            ErrorMessageResourceType = typeof(Resources))]
         public string Password { get; set; }
         public byte Type { get; set; }
         public string Name { get; set; }
@@ -27,7 +40,7 @@ namespace GameIn.Models
         public int? CountryID { get; set; }
         public SelectListItem States { get; set; }
         public int? StateID { get; set; }
-        public Nullable<byte> Region { get; set; }
+        public int? Region { get; set; }
         public string SubRegion { get; set; }
         public byte Lang { get; set; }
         public string TimeZone { get; set; }

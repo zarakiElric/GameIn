@@ -141,13 +141,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Resources.ES1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ES.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Enums\Users.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AppLog.cs">
+      <DependentUpon>Countries.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cities.cs">
       <DependentUpon>Countries.tt</DependentUpon>
@@ -177,7 +187,7 @@
       <DependentUpon>Users.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Users.cs">
-      <DependentUpon>Users.tt</DependentUpon>
+      <DependentUpon>Countries.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Users.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -247,14 +257,15 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\imgBlue\ajax-loader.gif" />
     <Content Include="Content\themes\red.css" />
     <Content Include="Content\themes\blue.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <EmbeddedResource Include="App_GlobalResources\Resources.ES.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.ES.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.ES1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EntityDeploy Include="Models\Users.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

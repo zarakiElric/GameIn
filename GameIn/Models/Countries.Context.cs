@@ -22,12 +22,14 @@ namespace GameIn.Models
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            //throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AppLog> AppLog { get; set; }
         public virtual DbSet<Cities> Cities { get; set; }
         public virtual DbSet<Countries> Countries { get; set; }
         public virtual DbSet<States> States { get; set; }
         public virtual DbSet<TimeZones> TimeZones { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

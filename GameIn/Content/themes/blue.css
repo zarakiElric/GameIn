@@ -75,3 +75,10 @@ textarea {
 .validation-summary-valid {
     display: none;
 }
+
+.ajaxLoader {
+    display: none;
+    background: url(imgBlue/ajax-loader.gif);
+    width: 128px;
+    height: 15px;
+}

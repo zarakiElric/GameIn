@@ -11,7 +11,6 @@ namespace GameIn.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Web.Mvc;
     using App_GlobalResources;
 
     public partial class Users
@@ -19,34 +18,43 @@ namespace GameIn.Models
         public long ID { get; set; }
 
         [Display(ResourceType = typeof(Resources), Name = "Email")]
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredField",
-            ErrorMessageResourceType = typeof(Resources))]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Resources))]
+        [MaxLength(500)]
+        [EmailAddress(ErrorMessageResourceName = "InvalidEmail", ErrorMessageResourceType = typeof(Resources))]
         public string Email { get; set; }
 
         [Display(ResourceType = typeof(Resources), Name = "Username")]
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredField",
-            ErrorMessageResourceType = typeof(Resources))]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Resources))]
+        [MaxLength(200)]
         public string UserName { get; set; }
 
         [Display(ResourceType = typeof(Resources), Name = "Password")]
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredField",
-            ErrorMessageResourceType = typeof(Resources))]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Resources))]
+        [MinLength(7)]
         public string Password { get; set; }
+
         public byte Type { get; set; }
         public string Name { get; set; }
         public bool Gender { get; set; }
         public bool Status { get; set; }
-        public SelectListItem Countries { get; set; }
-        public int? CountryID { get; set; }
-        public SelectListItem States { get; set; }
-        public int? StateID { get; set; }
+        public int? Country { get; set; }
+        public int? State { get; set; }
         public int? Region { get; set; }
+
+        [MaxLength(200)]
         public string SubRegion { get; set; }
         public byte Lang { get; set; }
+        public byte Theme { get; set; }
         public string TimeZone { get; set; }
-        public System.DateTime CreateDate { get; set; }
-        public Nullable<System.DateTime> LastLogin { get; set; }
+        public DateTime CreateDate { get; set; }
+        public Nullable<DateTime> LastLogin { get; set; }
         public string LastIP { get; set; }
         public string LastUserAgent { get; set; }
+
+        public Users()
+        {
+            Type = (int)Enums.Users.Type.Standard;
+            Lang = (int)Enums.Users.Lang.en_US;
+        }
     }
 }

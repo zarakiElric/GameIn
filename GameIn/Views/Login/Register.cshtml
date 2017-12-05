@@ -6,11 +6,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Ajax.BeginForm("RegisterUser", new AjaxOptions { UpdateTargetId = "updateME" }))
+@using (Ajax.BeginForm("Register", new AjaxOptions { OnBegin= "onbegin", OnSuccess= "onsuccess", UpdateTargetId = "updateME" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-    <div id="updateME"></div>
     <fieldset class="fs_container">
         <legend>@Resources.Resources.Register</legend>
 
@@ -73,21 +72,21 @@
 
         <div class="divRow">
             <div class="editor-label">
-                @Html.LabelFor(model => model.Countries, Resources.Resources.Country)
+                @Html.LabelFor(model => model.Country, Resources.Resources.Country)
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(model => model.CountryID, new SelectList(ViewBag.CountriesList, "Value", "Text"), Resources.Resources.Select,
+                @Html.DropDownListFor(model => model.Country, new SelectList(ViewBag.CountriesList, "Value", "Text"), Resources.Resources.Select,
              new { @class = "form-control", @onchange = "FillStates()" })
             </div>
         </div>
 
         <div class="divRow">
             <div class="editor-label">
-                @Html.LabelFor(model => model.States, Resources.Resources.State)
+                @Html.LabelFor(model => model.State, Resources.Resources.State)
             </div>
             <div class="editor-field">
-                @Html.DropDownList("StatesList", Resources.Resources.Select)
-                @Html.ValidationMessageFor(model => model.States)
+                @Html.DropDownList("StatesList")
+                @Html.ValidationMessageFor(model => model.State)
             </div>
         </div>
 
@@ -96,7 +95,7 @@
                 @Html.LabelFor(model => model.Region, Resources.Resources.Region)
             </div>
             <div class="editor-field">
-                @Html.DropDownList("CitiesList", Resources.Resources.Select)
+                @Html.DropDownList("CitiesList")
                 @Html.ValidationMessageFor(model => model.Region)
             </div>
         </div>
@@ -124,6 +123,9 @@
         <p>
             <input id="btn_Register" type="submit" value="@Resources.Resources.CreateAccount" />
         </p>
+        <div id="updateME" align="center"></div>
+        <div id="loader" align="center"><img class="ajaxLoader" /></div>
+        <br />
     </fieldset>
 }
 
@@ -192,6 +194,14 @@ function FillCities()
     });
 }
 
+function onbegin()
+{
+    $(".ajaxLoader").css("display", "block");
+}
+function onsuccess()
+{
+    $(".ajaxLoader").css("display", "none");
+}
 
 </script>
 }

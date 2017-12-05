@@ -4,7 +4,22 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="gameinModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="gameinModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Error" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Method" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Class" Type="nvarchar" MaxLength="50" />
+          <Property Name="ErrorType" Type="nvarchar" MaxLength="200" />
+          <Property Name="StackTrace" Type="nvarchar(max)" />
+          <Property Name="Source" Type="nvarchar(max)" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="IP" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Cities">
           <Key>
             <PropertyRef Name="ID" />
@@ -38,17 +53,57 @@
           <Property Name="UTCOffset" Type="smallint" Nullable="false" />
           <Property Name="WindowsID" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type" Type="tinyint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Country" Type="tinyint" Nullable="false" />
+          <Property Name="State" Type="int" />
+          <Property Name="Region" Type="bigint" />
+          <Property Name="SubRegion" Type="nvarchar" MaxLength="200" />
+          <Property Name="Lang" Type="tinyint" Nullable="false" />
+          <Property Name="Theme" Type="tinyint" />
+          <Property Name="TimeZone" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLogin" Type="datetime" />
+          <Property Name="LastIP" Type="varchar" MaxLength="15" />
+          <Property Name="LastUserAgent" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityContainer Name="gameinModelStoreContainer">
+          <EntitySet Name="AppLog" EntityType="Self.AppLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeZones" EntityType="Self.TimeZones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="gameinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AppLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Error" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Class" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="IP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         <EntityType Name="Cities">
           <Key>
             <PropertyRef Name="ID" />
@@ -82,11 +137,37 @@
           <Property Name="UTCOffset" Type="Int16" Nullable="false" />
           <Property Name="WindowsID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="Byte" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Country" Type="Byte" Nullable="false" />
+          <Property Name="State" Type="Byte" />
+          <Property Name="Region" Type="Byte" />
+          <Property Name="SubRegion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Lang" Type="Byte" Nullable="false" />
+          <Property Name="TimeZone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="LastIP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="LastUserAgent" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Theme" Type="Byte" />
+        </EntityType>
         <EntityContainer Name="gameinEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppLog" EntityType="Self.AppLog" />
           <EntitySet Name="Cities" EntityType="Self.Cities" />
           <EntitySet Name="Countries" EntityType="Self.Countries" />
           <EntitySet Name="States" EntityType="Self.States" />
           <EntitySet Name="TimeZones" EntityType="Self.TimeZones" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -94,6 +175,22 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="gameinModelStoreContainer" CdmEntityContainer="gameinEntities">
+          <EntitySetMapping Name="AppLog">
+            <EntityTypeMapping TypeName="gameinModel.AppLog">
+              <MappingFragment StoreEntitySet="AppLog">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="ErrorType" ColumnName="ErrorType" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="gameinModel.Cities">
               <MappingFragment StoreEntitySet="Cities">
@@ -128,6 +225,31 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UTCOffset" ColumnName="UTCOffset" />
                 <ScalarProperty Name="WindowsID" ColumnName="WindowsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="gameinModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Theme" ColumnName="Theme" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="SubRegion" ColumnName="SubRegion" />
+                <ScalarProperty Name="Lang" ColumnName="Lang" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="LastIP" ColumnName="LastIP" />
+                <ScalarProperty Name="LastUserAgent" ColumnName="LastUserAgent" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

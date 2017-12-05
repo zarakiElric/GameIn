@@ -133,6 +133,15 @@ namespace GameIn.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid email..
+        /// </summary>
+        public static string InvalidEmail {
+            get {
+                return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {

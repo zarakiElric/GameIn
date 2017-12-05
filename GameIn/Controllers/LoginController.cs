@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Threading;
-using System.Globalization;
 using GameIn.Models;
+using System.Net;
+using System.Data.Entity;
 
 namespace GameIn.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
 
         gameinEntities gEntity = new gameinEntities();
         List<SelectListItem> EmptyList = new List<SelectListItem>();
-        SelectListItem emptyitem = new SelectListItem { Value = null, Text = " "};
+        SelectListItem emptyitem = new SelectListItem { Value = "", Text = App_GlobalResources.Resources.Select};
 
         #region Views
 
@@ -27,7 +26,6 @@ namespace GameIn.Controllers
         /// Date: 30/11/17
         public ActionResult Home(string lang)
         {
-
             return View();
         }
 
@@ -59,54 +57,19 @@ namespace GameIn.Controllers
         /// Developer: Dan Palacios
         /// Date: 30/11/17
         [HttpPost]
-        public ActionResult Register(FormCollection collection, Users users, string lang, string StatesList, string CitiesList)
+        public ActionResult Register(FormCollection collection, Users NewUser, string lang, string StatesList, string CitiesList)
         {
 
             if(ModelState.IsValid)
             {
-                string test = users.UserName;
+                if (NewUser.Country == 0)
+                {
+                    return PartialView(App_GlobalResources.Resources.RequiredField.Replace("{0}", App_GlobalResources.Resources.Country));
+                }
 
                 if (StatesList != string.Empty)
                 {
-                    users.StateID = Convert.ToInt32(StatesList);
-                }
-                if (CitiesList != string.Empty)
-                {
-                    users.Region = Convert.ToInt32(CitiesList);
-                }
-                return Content("Ty", "text/html");
-            }
-            else
-            {
-                ViewBag.CountriesList = GetCountries();
-                EmptyList.Add(emptyitem);
-                ViewBag.StatesList = EmptyList;
-                ViewBag.CitiesList = EmptyList;
-                return View();
-            }
-
-        }
-
-        /// <summary>
-        /// Registration of users
-        /// </summary>
-        /// <param name="collection">FormCollection</param>
-        /// <param name="users">Users</param>
-        /// <param name="lang">string</param>
-        /// <param name="StatesList">string</param>
-        /// <param name="CitiesList">string</param>
-        /// <returns>string</returns>
-        /// Developer: Dan Palacios
-        /// Date: 03/12/17
-        public string RegisterUser(FormCollection collection, Users NewUser, string lang, string StatesList, string CitiesList)
-        {
-            if (ModelState.IsValid)
-            {
-                string test = NewUser.UserName;
-
-                if (StatesList != string.Empty)
-                {
-                    NewUser.StateID = Convert.ToInt32(StatesList);
+                    NewUser.State = Convert.ToInt32(StatesList);
                 }
                 if (CitiesList != string.Empty)
                 {
@@ -114,8 +77,18 @@ namespace GameIn.Controllers
                 }
 
                 //Add method to save changes
-
-                return App_GlobalResources.Resources.RegistrationComplete;
+                try
+                {
+                    DateTime ServerDate = gEntity.Database.SqlQuery<DateTime>("Select GetUtcDate()").FirstOrDefault();
+                    NewUser.CreateDate = ServerDate != null ? ServerDate : new DateTime();
+                    gEntity.Users.Add(NewUser);
+                    gEntity.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    AppLog("RegisterUser", "LoginController.cs", ex);
+                }
+                return Content(App_GlobalResources.Resources.RegistrationComplete, "text/html");
             }
             else
             {
@@ -123,7 +96,7 @@ namespace GameIn.Controllers
                 EmptyList.Add(emptyitem);
                 ViewBag.StatesList = EmptyList;
                 ViewBag.CitiesList = EmptyList;
-                return App_GlobalResources.Resources.RequiredFieldMissing;
+                return View(NewUser);
             }
 
         }

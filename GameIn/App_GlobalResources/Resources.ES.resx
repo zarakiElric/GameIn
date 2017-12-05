@@ -141,6 +141,9 @@
   <data name="Home" xml:space="preserve">
     <value>Inicio</value>
   </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Correo electrónico invalido.</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
   </data>
@@ -160,13 +163,13 @@
     <value>Registro</value>
   </data>
   <data name="RegistrationComplete" xml:space="preserve">
-    <value>Usuario registrado con exito.</value>
+    <value>Usuario registrado con éxito.</value>
   </data>
   <data name="RequiredField" xml:space="preserve">
     <value>{0} es un campo requerido.</value>
   </data>
   <data name="RequiredFieldMissing" xml:space="preserve">
-    <value>Uno o varios campos obligatorios estan vacios.</value>
+    <value>Uno o varios campos obligatorios están vacíos.</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>-- Seleccionar --</value>

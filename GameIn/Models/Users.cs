@@ -11,6 +11,7 @@ namespace GameIn.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using App_GlobalResources;
 
     public partial class Users
@@ -19,19 +20,24 @@ namespace GameIn.Models
 
         [Display(ResourceType = typeof(Resources), Name = "Email")]
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Resources))]
-        [MaxLength(500)]
+        [StringLength(500, MinimumLength = 3, ErrorMessageResourceName = "MaxPassed", ErrorMessageResourceType = typeof(Resources))]
         [EmailAddress(ErrorMessageResourceName = "InvalidEmail", ErrorMessageResourceType = typeof(Resources))]
         public string Email { get; set; }
 
         [Display(ResourceType = typeof(Resources), Name = "Username")]
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Resources))]
-        [MaxLength(200)]
+        [StringLength(200, MinimumLength = 3, ErrorMessageResourceName = "MaxPassed", ErrorMessageResourceType = typeof(Resources))]
         public string UserName { get; set; }
 
         [Display(ResourceType = typeof(Resources), Name = "Password")]
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "RequiredField", ErrorMessageResourceType = typeof(Resources))]
-        [MinLength(7)]
+        [StringLength(200, MinimumLength = 5, ErrorMessageResourceName = "MaxPassed", ErrorMessageResourceType = typeof(Resources))]
         public string Password { get; set; }
+
+        [NotMapped]
+        [Display(ResourceType = typeof(Resources), Name = "ConfirmPassword")]
+        [Compare("Password", ErrorMessageResourceName = "ConfirmMatch", ErrorMessageResourceType = typeof(Resources))]
+        public string ConfirmPassword { get; set; }
 
         public byte Type { get; set; }
         public string Name { get; set; }
@@ -41,7 +47,7 @@ namespace GameIn.Models
         public int? State { get; set; }
         public int? Region { get; set; }
 
-        [MaxLength(200)]
+        [StringLength(200, MinimumLength = 0, ErrorMessageResourceName = "MaxPassed", ErrorMessageResourceType = typeof(Resources))]
         public string SubRegion { get; set; }
         public byte Lang { get; set; }
         public byte Theme { get; set; }
@@ -56,5 +62,7 @@ namespace GameIn.Models
             Type = (int)Enums.Users.Type.Standard;
             Lang = (int)Enums.Users.Lang.en_US;
         }
+
+
     }
 }

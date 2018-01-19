@@ -1,17 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Mvc;
 
 namespace GameIn.Controllers
 {
-    public class BaseController : Controller
+    public partial class BaseController : Controller
     {
-        public void AppLog(string EMethod, string EClass, Exception ex, int? UserID = null)
+
+        /// <summary>
+        /// Register errors in application database log
+        /// </summary>
+        /// <param name="EMethod">string</param>
+        /// <param name="EClass">string</param>
+        /// <param name="ex">Exception</param>
+        /// <param name="UserID">int?</param>
+        /// Developer: Dan Palacios
+        /// Date: 13/12/17
+        public void AppLog(string EMethod, string EClass, Exception ex, int UserID = 0)
         {
             try
             {
@@ -33,5 +43,8 @@ namespace GameIn.Controllers
                 Console.Write(exception.Message);
             }
         }
+
+
+
     }
 }

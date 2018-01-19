@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Back" xml:space="preserve">
+    <value>Regresar</value>
+  </data>
   <data name="BackLogin" xml:space="preserve">
     <value>Regresar a inicio de sesión</value>
+  </data>
+  <data name="ConfirmMatch" xml:space="preserve">
+    <value>Contraseñas no coinciden</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirmar contraseña</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>País</value>
@@ -138,6 +147,9 @@
   <data name="Gender" xml:space="preserve">
     <value>Genero</value>
   </data>
+  <data name="GeneralError" xml:space="preserve">
+    <value>No se pudieron guardar los cambios, por favor intentelo de nuevo.</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Inicio</value>
   </data>
@@ -147,14 +159,26 @@
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Iniciar sesión</value>
+  </data>
+  <data name="LoginIncorrect" xml:space="preserve">
+    <value>Usuario o contraseña incorrectos.</value>
+  </data>
   <data name="Male" xml:space="preserve">
     <value>Masculino</value>
+  </data>
+  <data name="MaxPassed" xml:space="preserve">
+    <value>{0} debe contener al menos {2} caracteres y máximo {1}.</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Nombre</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Contraseña</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Perfil</value>
   </data>
   <data name="Region" xml:space="preserve">
     <value>Municipio</value>
@@ -164,6 +188,9 @@
   </data>
   <data name="RegistrationComplete" xml:space="preserve">
     <value>Usuario registrado con éxito.</value>
+  </data>
+  <data name="RegistrationIncomplete" xml:space="preserve">
+    <value>Registro no pudo ser completado.</value>
   </data>
   <data name="RequiredField" xml:space="preserve">
     <value>{0} es un campo requerido.</value>

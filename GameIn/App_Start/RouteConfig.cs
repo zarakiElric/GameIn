@@ -18,6 +18,12 @@ namespace GameIn
                 url: "{controller}/{action}/{lang}/{CurrentView}",
                 defaults: new { controller = "Login", action = "Home", lang = UrlParameter.Optional, CurrentView = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Profile",
+                url: "{controller}/{action}/{lang}/{CurrentView}",
+                defaults: new { controller = "Logged", action = "Home", lang = UrlParameter.Optional, CurrentView = UrlParameter.Optional }
+            );
         }
     }
 }

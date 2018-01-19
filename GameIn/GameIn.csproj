@@ -131,11 +131,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\Resources.ES.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.ES.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_GlobalResources\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -151,7 +146,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BaseController.Security.cs">
+      <DependentUpon>BaseController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Enums\Users.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -258,6 +257,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\imgBlue\ajax-loader.gif" />
+    <Content Include="Content\themes\Game.ico" />
     <Content Include="Content\themes\red.css" />
     <Content Include="Content\themes\blue.css" />
     <Content Include="Global.asax" />
@@ -330,6 +330,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Login\Home.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Shared\LogLayout.cshtml" />
+    <Content Include="Views\Logged\Profile.cshtml" />
+    <Content Include="Views\Logged\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,10 +6,19 @@
 <h2>@Resources.Resources.Home</h2>
 
 
+
 <li>
     @Html.ActionLink(Resources.Resources.Register, "Register", "Login",
     new {
             lang = HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
             ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : ""
         } , null)
+</li>
+<li>
+    @Html.ActionLink(Resources.Resources.Login, "Login", "Login",
+        new
+        {
+            lang = HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
+                ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : ""
+        }, null)
 </li>

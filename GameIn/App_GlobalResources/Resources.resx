@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
   <data name="BackLogin" xml:space="preserve">
     <value>Back to login</value>
+  </data>
+  <data name="ConfirmMatch" xml:space="preserve">
+    <value>Password mismatch</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>Country</value>
@@ -138,6 +147,9 @@
   <data name="Gender" xml:space="preserve">
     <value>Gender</value>
   </data>
+  <data name="GeneralError" xml:space="preserve">
+    <value>Couldn't save changes, please try again later.</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
@@ -147,14 +159,26 @@
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginIncorrect" xml:space="preserve">
+    <value>Username or password invalid.</value>
+  </data>
   <data name="Male" xml:space="preserve">
     <value>Male</value>
+  </data>
+  <data name="MaxPassed" xml:space="preserve">
+    <value>{0} must be at least {2} characters and maximum {1}.</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
   </data>
   <data name="Region" xml:space="preserve">
     <value>Region</value>
@@ -164,6 +188,9 @@
   </data>
   <data name="RegistrationComplete" xml:space="preserve">
     <value>User registered successfully.</value>
+  </data>
+  <data name="RegistrationIncomplete" xml:space="preserve">
+    <value>Registration couldn't complete.</value>
   </data>
   <data name="RequiredField" xml:space="preserve">
     <value>{0} is a required field.</value>

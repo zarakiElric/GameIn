@@ -62,10 +62,6 @@ namespace GameIn.Controllers
 
             if(ModelState.IsValid)
             {
-                if (NewUser.Country == 0)
-                {
-                    return PartialView(App_GlobalResources.Resources.RequiredField.Replace("{0}", App_GlobalResources.Resources.Country));
-                }
 
                 if (StatesList != string.Empty)
                 {
@@ -76,29 +72,62 @@ namespace GameIn.Controllers
                     NewUser.Region = Convert.ToInt32(CitiesList);
                 }
 
+                NewUser.Password = MD5Hash(NewUser.Password);
+                NewUser.ConfirmPassword = NewUser.Password;
+
                 //Add method to save changes
                 try
                 {
                     DateTime ServerDate = gEntity.Database.SqlQuery<DateTime>("Select GetUtcDate()").FirstOrDefault();
                     NewUser.CreateDate = ServerDate != null ? ServerDate : new DateTime();
-                    gEntity.Users.Add(NewUser);
-                    gEntity.SaveChanges();
+                    if(!gEntity.Users.Any(x => x.Email == NewUser.Email) && !gEntity.Users.Any(x => x.UserName == NewUser.UserName))
+                    {
+                        gEntity.Users.Add(NewUser);
+                        gEntity.SaveChanges();
+                    }
+                    else
+                    {
+                        return Content("Usuario existente", "text/html");
+                    }
                 }
                 catch (Exception ex)
                 {
                     AppLog("RegisterUser", "LoginController.cs", ex);
+                    return Content(App_GlobalResources.Resources.GeneralError, "text/html");
                 }
+
                 return Content(App_GlobalResources.Resources.RegistrationComplete, "text/html");
             }
             else
             {
-                ViewBag.CountriesList = GetCountries();
-                EmptyList.Add(emptyitem);
-                ViewBag.StatesList = EmptyList;
-                ViewBag.CitiesList = EmptyList;
-                return View(NewUser);
+                //ViewBag.CountriesList = GetCountries();
+                //EmptyList.Add(emptyitem);
+                //ViewBag.StatesList = EmptyList;
+                //ViewBag.CitiesList = EmptyList;
+                //return View(NewUser);
+                return Content(App_GlobalResources.Resources.RegistrationIncomplete, "text/html");
             }
+        }
 
+        [HttpGet]
+        public ActionResult Login(string lang)
+        {
+            return View();
+        }
+
+
+        public ActionResult Login(Users LoginUser, string lang)
+        {
+
+            if(LoginIsValid(LoginUser.UserName, LoginUser.Password))
+            {
+                return Json(new { url = Url.Action("../Logged/Profile") });
+                //return View("~/Views/Logged/Profile.cshtml");
+            }
+            else
+            {
+                return Content(App_GlobalResources.Resources.LoginIncorrect, "text/html");
+            }
         }
 
         #endregion
@@ -196,41 +225,24 @@ namespace GameIn.Controllers
             }
         }
 
-        ///// <summary>
-        ///// Change current lang of application
-        ///// </summary>
-        ///// <param name="lang">string</param>
-        ///// Developer: Dan Palacios
-        ///// Date: 30/11/17
-        //protected void ChangeLang(string lang)
-        //{
-        //    Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-        //    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-        //    if (lang == "es")
-        //    {
-        //        Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
-        //        Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-MX");
-        //    }
-        //    SetTheme();
-        //}
+        /// <summary>
+        /// Check if login is correct
+        /// </summary>
+        /// <param name="username">string</param>
+        /// <param name="pwd">string</param>
+        /// <returns>bool</returns>
+        /// Developer: Dan Palacios
+        /// Date: 19/01/18
+        public bool LoginIsValid(string username, string pwd)
+        {
+            pwd = MD5Hash(pwd);
+            if ((from users in gEntity.Users where users.UserName == username && users.Password == pwd select users) != null)
+            {
+                return true;
+            }
 
-        ///// <summary>
-        ///// Set theme for current application
-        ///// </summary>
-        ///// Developer: Dan Palacios
-        ///// Date: 30/11/17
-        //protected void SetTheme()
-        //{
-        //    if (Session["theme"] != null && Session["theme"].ToString() != string.Empty)
-        //    {
-        //        ViewBag.theme = Session["theme"].ToString();
-        //    }
-        //    else
-        //    {
-        //        ViewBag.theme = "blue";
-        //        Session["theme"] = "blue";
-        //    }
-        //}
+            return false;
+        }
 
         #endregion
 

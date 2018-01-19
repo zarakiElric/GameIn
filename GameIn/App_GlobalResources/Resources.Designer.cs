@@ -61,11 +61,38 @@ namespace GameIn.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        public static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back to login.
         /// </summary>
         public static string BackLogin {
             get {
                 return ResourceManager.GetString("BackLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password mismatch.
+        /// </summary>
+        public static string ConfirmMatch {
+            get {
+                return ResourceManager.GetString("ConfirmMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm password.
+        /// </summary>
+        public static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
             }
         }
         
@@ -124,6 +151,15 @@ namespace GameIn.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t save changes, please try again later..
+        /// </summary>
+        public static string GeneralError {
+            get {
+                return ResourceManager.GetString("GeneralError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
@@ -151,11 +187,38 @@ namespace GameIn.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username or password invalid..
+        /// </summary>
+        public static string LoginIncorrect {
+            get {
+                return ResourceManager.GetString("LoginIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Male.
         /// </summary>
         public static string Male {
             get {
                 return ResourceManager.GetString("Male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} must be at least {2} characters and maximum {1}..
+        /// </summary>
+        public static string MaxPassed {
+            get {
+                return ResourceManager.GetString("MaxPassed", resourceCulture);
             }
         }
         
@@ -174,6 +237,15 @@ namespace GameIn.App_GlobalResources {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string Profile {
+            get {
+                return ResourceManager.GetString("Profile", resourceCulture);
             }
         }
         
@@ -201,6 +273,15 @@ namespace GameIn.App_GlobalResources {
         public static string RegistrationComplete {
             get {
                 return ResourceManager.GetString("RegistrationComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration couldn&apos;t complete..
+        /// </summary>
+        public static string RegistrationIncomplete {
+            get {
+                return ResourceManager.GetString("RegistrationIncomplete", resourceCulture);
             }
         }
         

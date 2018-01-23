@@ -1,6 +1,155 @@
-﻿@{
+﻿@model GameIn.Models.Users
+
+@{
     ViewBag.Title = Resources.Resources.Profile;
     Layout = "~/Views/Shared/LogLayout.cshtml";
 }
 
-<h2>@Resources.Resources.Profile</h2>
+@using (Ajax.BeginForm("Profile", new AjaxOptions { OnBegin = "onbegin", OnSuccess = "onsuccess", UpdateTargetId = "updateME" }))
+{
+    @Html.AntiForgeryToken()
+<fieldset class="fs_container">
+    <legend>@Resources.Resources.Profile</legend>
+
+    <div class="divRow">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </div>
+
+    <div class="divRow">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+    </div>
+
+    <div class="divRow">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+    </div>
+
+    <div class="divRow">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConfirmPassword)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.ConfirmPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </div>
+    </div>
+
+    <div class="divRow">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name, Resources.Resources.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+    </div>
+
+    <div class="divRow">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gender, Resources.Resources.Gender)
+        </div>
+        <div class="editor-field-gender">
+            @Html.DropDownList(Resources.Resources.Gender, new SelectList(new[]
+              {
+    new { Value = "true", Text = @Resources.Resources.Male },
+    new { Value = "false", Text = @Resources.Resources.Female },
+}, "Value", "Text", Model)
+              )
+
+            @Html.ValidationMessageFor(model => model.Gender)
+        </div>
+    </div>
+
+
+    <div class="divRow">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Country, Resources.Resources.Country)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Country, new SelectList(ViewBag.CountriesList, "Value", "Text"), Resources.Resources.Select,
+                   new { @class = "form-control", @onchange = "FillStates()" })
+        </div>
+    </div>
+
+    <div class="divRow">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.State, Resources.Resources.State)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("StatesList")
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+    </div>
+
+    <div class="divRow">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Region, Resources.Resources.Region)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("CitiesList")
+            @Html.ValidationMessageFor(model => model.Region)
+        </div>
+    </div>
+
+    <div class="divRow">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SubRegion, Resources.Resources.SubRegion)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SubRegion)
+            @Html.ValidationMessageFor(model => model.SubRegion)
+        </div>
+    </div>
+
+    <div class="divRow">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TimeZone, Resources.Resources.TimeZone)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.TimeZone, new SelectList(ViewBag.TimeZonesList, "Value", "Text"), Resources.Resources.Select,
+                          new { @class = "form-control" })
+        </div>
+    </div>
+
+    <p>
+        <input id="btn_Register" type="submit" value="@Resources.Resources.Update" />
+    </p>
+    <div id="updateME" align="center"></div>
+    <div id="loader" align="center"><img class="ajaxLoader" /></div>
+    <br />
+</fieldset>
+}
+
+@Html.Hidden("hf_lang", HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
+            ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : "")
+
+@section Scripts
+{
+    <script>
+function onbegin() {
+    $(".ajaxLoader").css("display", "block");
+}
+function onsuccess(result) {
+    if (result.url) { window.location.href = result.url }
+    $(".ajaxLoader").css("display", "none");
+}
+    </script>
+}
+

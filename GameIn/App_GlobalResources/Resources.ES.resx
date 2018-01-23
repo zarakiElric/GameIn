@@ -165,6 +165,9 @@
   <data name="LoginIncorrect" xml:space="preserve">
     <value>Usuario o contraseña incorrectos.</value>
   </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
   <data name="Male" xml:space="preserve">
     <value>Masculino</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="TimeZone" xml:space="preserve">
     <value>Zona horaria</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Actualizar</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Usuario</value>

@@ -43,7 +43,8 @@ namespace GameIn.Models
         public string Name { get; set; }
         public bool Gender { get; set; }
         public bool Status { get; set; }
-        public int? Country { get; set; }
+
+        public byte? Country { get; set; }
         public int? State { get; set; }
         public int? Region { get; set; }
 

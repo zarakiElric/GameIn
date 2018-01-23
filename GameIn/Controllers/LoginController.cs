@@ -11,7 +11,6 @@ namespace GameIn.Controllers
     public class LoginController : BaseController
     {
 
-        gameinEntities gEntity = new gameinEntities();
         List<SelectListItem> EmptyList = new List<SelectListItem>();
         SelectListItem emptyitem = new SelectListItem { Value = "", Text = App_GlobalResources.Resources.Select};
 
@@ -41,6 +40,7 @@ namespace GameIn.Controllers
         {
 
             ViewBag.CountriesList = GetCountries();
+            ViewBag.TimeZonesList = GetTimeZones();
             EmptyList.Add(emptyitem);
             ViewBag.StatesList = EmptyList;
             ViewBag.CitiesList = EmptyList;
@@ -62,7 +62,10 @@ namespace GameIn.Controllers
 
             if(ModelState.IsValid)
             {
-
+                if(NewUser.Country == null)
+                {
+                    NewUser.Country = 0;
+                }
                 if (StatesList != string.Empty)
                 {
                     NewUser.State = Convert.ToInt32(StatesList);
@@ -135,57 +138,6 @@ namespace GameIn.Controllers
         #region Methods
 
         /// <summary>
-        /// Get countries from database
-        /// </summary>
-        /// <returns>IEnumerable<SelectListItem></returns>
-        /// Developer: Dan Palacios
-        /// Date: 30/11/17
-        private IEnumerable<SelectListItem> GetCountries()
-        {
-            List<SelectListItem> CountryListItem = new List<SelectListItem>();
-
-            using (gEntity.Database.Connection)
-            {
-                gEntity.Database.Connection.Open();
-                foreach (Countries country in gEntity.Countries)
-                {
-                    SelectListItem newitem = new SelectListItem
-                    {
-                        Text = country.Name,
-                        Value = country.ID.ToString()
-                    };
-                    CountryListItem.Add(newitem);
-                }
-
-                ViewBag.TimeZonesList = GetTimeZones();
-            }
-
-            return CountryListItem;
-        }
-
-        /// <summary>
-        /// Get time zones from database
-        /// </summary>
-        /// <returns>IEnumerable<SelectListItem></returns>
-        /// Developer: Dan Palacios
-        /// Date: 30/11/17
-        private IEnumerable<SelectListItem> GetTimeZones()
-        {
-            List<SelectListItem> TimeZonesListItem = new List<SelectListItem>();
-            foreach (TimeZones TimeZoneInfo in gEntity.TimeZones)
-            {
-                SelectListItem newitem = new SelectListItem
-                {
-                    Text = TimeZoneInfo.Name,
-                    Value = TimeZoneInfo.ID.ToString()
-                };
-                TimeZonesListItem.Add(newitem);
-            }
-
-            return TimeZonesListItem;
-        }
-
-        /// <summary>
         /// Get states from database according to the country id
         /// </summary>
         /// <param name="lang">string</param>
@@ -194,15 +146,9 @@ namespace GameIn.Controllers
         /// Developer: Dan Palacios
         /// Date: 30/11/17
         [HttpGet]
-        public ActionResult GetStates(string lang, int countryid)
+        public ActionResult GetStates(string lang, byte? countryid)
         {
-            using (gEntity.Database.Connection)
-            {
-                gEntity.Database.Connection.Open();
-                var states = (from proj in gEntity.States where proj.CountryID == countryid select proj).AsEnumerable().Select(projt => new { Name = projt.Name, StateID = projt.ID.ToString() }).ToList();
-                states.Insert(0, new { Name = App_GlobalResources.Resources.Select, StateID = "" });
-                return Json(states, JsonRequestBehavior.AllowGet);
-            }
+            return GetStates(countryid);
         }
 
         /// <summary>
@@ -214,15 +160,9 @@ namespace GameIn.Controllers
         /// Developer: Dan Palacios
         /// Date: 30/11/17
         [HttpGet]
-        public ActionResult GetCities(string lang, int stateid)
+        public ActionResult GetCities(string lang, int? stateid)
         {
-            using (gEntity.Database.Connection)
-            {
-                gEntity.Database.Connection.Open();
-                var cities = (from proj in gEntity.Cities where proj.StateID == stateid select proj).AsEnumerable().Select(projt => new { Name = projt.Name, CityID = projt.ID.ToString() }).ToList();
-                cities.Insert(0, new { Name = App_GlobalResources.Resources.Select, CityID = "" });
-                return Json(cities, JsonRequestBehavior.AllowGet);
-            }
+            return GetCities(stateid);
         }
 
         /// <summary>
@@ -235,10 +175,19 @@ namespace GameIn.Controllers
         /// Date: 19/01/18
         public bool LoginIsValid(string username, string pwd)
         {
-            pwd = MD5Hash(pwd);
-            if ((from users in gEntity.Users where users.UserName == username && users.Password == pwd select users) != null)
+            try
             {
-                return true;
+                pwd = MD5Hash(pwd);
+                Users UserReg = gEntity.Users.FirstOrDefault(users => users.UserName == username && users.Password == pwd);
+                if (UserReg != null)
+                {
+                    Session["User"] = UserReg;
+                    return true;
+                }
+            }
+            catch(Exception ex)
+            {
+                AppLog("LoginIsValid", "LoginController.cs", ex);
             }
 
             return false;

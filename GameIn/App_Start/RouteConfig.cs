@@ -16,7 +16,7 @@ namespace GameIn
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{lang}/{CurrentView}",
-                defaults: new { controller = "Login", action = "Home", lang = UrlParameter.Optional, CurrentView = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "Login", lang = UrlParameter.Optional, CurrentView = UrlParameter.Optional }
             );
 
             routes.MapRoute(

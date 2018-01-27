@@ -8,46 +8,40 @@
 @using (Ajax.BeginForm("Login", new AjaxOptions { OnBegin = "onbegin", OnSuccess = "onsuccess", UpdateTargetId = "updateME" }))
 {
     @Html.AntiForgeryToken()
-    <fieldset class="fs_container">
-        <legend>@Resources.Resources.Login</legend>
-        <div class="divRow">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.UserName)
+    <div>
+        <fieldset class="fs_container">
+            <legend>@Resources.Resources.Login</legend>
+            <div class="divRow">
+                <div class="editor-label">@Html.LabelFor(model => model.UserName)</div>
+                <div class="editor-field">@Html.EditorFor(model => model.UserName)</div>
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.UserName)
-                @Html.ValidationMessageFor(model => model.UserName)
-            </div>
-        </div>
+            <div class="divRow"><div></div><div>@Html.ValidationMessageFor(model => model.UserName)</div></div>
 
-        <div class="divRow">
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Password)
+            <div class="divRow">
+                <div class="editor-label">@Html.LabelFor(model => model.Password)</div>
+                <div class="editor-field">@Html.PasswordFor(model => model.Password)</div>
             </div>
-            <div class="editor-field">
-                @Html.PasswordFor(model => model.Password)
-                @Html.ValidationMessageFor(model => model.Password)
+            <div class="divRow"><div></div><div>@Html.ValidationMessageFor(model => model.Password)</div></div>
+
+            <div align="center"><input id="btn_Register" type="submit" value="@Resources.Resources.Login" /></div>
+            <div id="updateME" align="center"></div>
+            <div id="loader" align="center"><img class="ajaxLoader" /></div>
+            <br />
+            <div align="center">
+                @Html.ActionLink(Resources.Resources.NewAccount, "Register", "Login",
+                 new
+                 {
+                     lang = HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
+                         ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : ""
+                 },
+                 new { @class = "linkButton" })
             </div>
-        </div>
-        <p>
-            <input id="btn_Register" type="submit" value="@Resources.Resources.Login" />
-        </p>
-        <div id="updateME" align="center"></div>
-        <div id="loader" align="center"><img class="ajaxLoader" /></div>
-        <br />
-    </fieldset>
+        </fieldset>
+    </div>
 }
 
 @Html.Hidden("hf_lang", HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
             ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : "")
-<div>
-    @Html.ActionLink(Resources.Resources.Back, "Home", "Login",
-        new
-        {
-            lang = HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
-                ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : ""
-        }, null)
-</div>
 
 @section Scripts
 {
@@ -59,5 +53,14 @@ function onsuccess(result) {
     if (result.url) { window.location.href = result.url }
     $(".ajaxLoader").css("display", "none");
 }
+
+$(".fs_container :input").each(function ()
+{
+    $("[data-val-length]").keyup(function () { return false });
+    $("[data-val-length-max]").keyup(function () { return false });
+    $("[data-val-length-min]").keyup(function () { return false });
+    $("[data-val-required]").keyup(function () { return false });
+    $("[data-val-equalto]").keyup(function () { return false });
+});
 </script>
 }

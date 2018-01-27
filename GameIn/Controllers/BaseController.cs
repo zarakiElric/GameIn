@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using GameIn.Models;
 using System.Web.Mvc;
 using System.Linq;
+using System.Net;
 
 namespace GameIn.Controllers
 {
@@ -188,6 +189,29 @@ namespace GameIn.Controllers
                 jsonselectListItem.Add(slItem);
             }
             return jsonselectListItem;
+        }
+
+        /// <summary>
+        /// Get ipv4 addres
+        /// </summary>
+        /// <returns>string</returns>
+        /// Developer: Dan Palacios
+        /// Date: 27/01/18
+        public string GetIPAddress()
+        {
+            string IPAddress = string.Empty;
+            IPHostEntry Host = default(IPHostEntry);
+            string Hostname = null;
+            Hostname = Environment.MachineName;
+            Host = Dns.GetHostEntry(Hostname);
+            foreach (IPAddress IP in Host.AddressList)
+            {
+                if (IP.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    IPAddress = Convert.ToString(IP);
+                }
+            }
+            return IPAddress;
         }
 
     }

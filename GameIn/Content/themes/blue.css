@@ -16,7 +16,7 @@ header, footer, nav, section {
 
 .divRow div {
     display: table-cell;
-    padding: 10px;
+    padding: 3px;
 }
 
 .editor-label{color:#3c3c3c}
@@ -30,18 +30,17 @@ header, footer, nav, section {
 -----------------------------------------------------------*/
 fieldset {
     border: 1px solid #ddd;
-    padding: 0 1.8em 0 1.8em;
+    padding: 1.8em;
     margin: 0 0 1.5em 0;
     background: #cacff6;
     display: inline-block;
-    border-radius:3px;
+    border-radius:10px;
 }
 
 legend {
     margin: 1.5em 0 0 0;
     font-size: 1.2em;
     font-weight: bold;
-    border:1px solid #ddd;
     color:#102062;
 }
 
@@ -81,4 +80,101 @@ textarea {
     background: url(imgBlue/ajax-loader.gif);
     width: 128px;
     height: 15px;
+}
+
+.logout {
+    height: 34px;
+    width: 34px;
+    display: block;
+    background: url(imgBlue/logout.png);
+    background-repeat: no-repeat;
+}
+
+.logout:hover {
+    height: 34px;
+    width: 34px;
+    display: block;
+    background: url(imgBlue/logout.png);
+    background-repeat: no-repeat;
+    background-position: -44px 0;
+}
+
+.Back {
+    height: 34px;
+    width: 34px;
+    display: block;
+    background: url(imgBlue/back.png);
+    background-repeat: no-repeat;
+}
+
+.Back:hover {
+    height: 34px;
+    width: 34px;
+    display: block;
+    background: url(imgBlue/back.png);
+    background-repeat: no-repeat;
+    background-position: -34px 0;
+}
+
+.en_us {
+    height: 32px;
+    width: 32px;
+    display: block;
+    background: url(en_US.png);
+    background-repeat: no-repeat;
+}
+
+.en_us:hover {
+    height: 32px;
+    width: 32px;
+    display: block;
+    background: url(en_US.png);
+    background-repeat: no-repeat;
+    background-position: -34px 0;
+}
+
+.es_mx {
+    height: 32px;
+    width: 32px;
+    display: block;
+    background: url(es_MX.png);
+    background-repeat: no-repeat;
+}
+
+.es_mx:hover {
+    height: 32px;
+    width: 32px;
+    display: block;
+    background: url(es_MX.png);
+    background-repeat: no-repeat;
+    background-position: -34px 0;
+}
+
+.linkButton:link, .linkButton:visited {
+    background-color: #2196f3;
+    color: white;
+    padding: 7px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width:250px;
+}
+
+
+.linkButton:hover, .linkButton:active {
+    background-color: #76b9ee;
+}
+
+input[type="submit"] {
+    background-color: #1476ed;
+    color: white;
+    padding: 10px 15px;
+    margin: 4px 0;
+    border: none;
+    cursor: pointer;
+    width: 270px;
+}
+
+input[type="submit"]:hover {
+    opacity: 0.8;
 }

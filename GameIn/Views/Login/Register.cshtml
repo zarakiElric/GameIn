@@ -10,208 +10,220 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-<fieldset class="fs_container">
-    <legend>@Resources.Resources.Register</legend>
+    <fieldset class="fs_container">
+        <legend>@Resources.Resources.Register</legend>
 
-    <div class="divRow">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
+        <div class="divRow">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Email)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Email)
+            </div>
+            <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-    </div>
 
-    <div class="divRow">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserName)
+        <div class="divRow">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UserName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UserName)
+            </div>
+            <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UserName)
-            @Html.ValidationMessageFor(model => model.UserName)
-        </div>
-    </div>
 
-    <div class="divRow">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
+        <div class="divRow">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Password)
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(model => model.Password)
+            </div>
+            <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.PasswordFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
-    </div>
 
-    <div class="divRow">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ConfirmPassword)
+        <div class="divRow">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ConfirmPassword)
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(model => model.ConfirmPassword)
+            </div>
+            <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.PasswordFor(model => model.ConfirmPassword)
-            @Html.ValidationMessageFor(model => model.ConfirmPassword)
-        </div>
-    </div>
 
-    <div class="divRow">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name, Resources.Resources.Name)
+        <div class="divRow">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Name, Resources.Resources.Name)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Name)
+            </div>
+            <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-    </div>
 
-    <div class="divRow">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Gender, Resources.Resources.Gender)
+        <div class="divRow">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Gender, Resources.Resources.Gender)
+            </div>
+            <div class="editor-field-gender">
+                @Html.DropDownList(Resources.Resources.Gender, new SelectList(new[]
+                 {
+                        new { Value = "true", Text = @Resources.Resources.Male },
+                        new { Value = "false", Text = @Resources.Resources.Female },
+                        }, "Value", "Text", Model)
+                 )
+            </div>
+            <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.Gender)
+            </div>
         </div>
-        <div class="editor-field-gender">
-            @Html.DropDownList(Resources.Resources.Gender, new SelectList(new[]
-         {
-        new { Value = "true", Text = @Resources.Resources.Male },
-        new { Value = "false", Text = @Resources.Resources.Female },
-    }, "Value", "Text", Model)
-         )
 
-            @Html.ValidationMessageFor(model => model.Gender)
-        </div>
-    </div>
 
+        <div class="divRow">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Country, Resources.Resources.Country)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.Country, new SelectList(ViewBag.CountriesList, "Value", "Text"), Resources.Resources.Select,
+                        new { @class = "form-control", @onchange = "FillStates()" })
+            </div>
+        </div>
 
-    <div class="divRow">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Country, Resources.Resources.Country)
+        <div class="divRow">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.State, Resources.Resources.State)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("StatesList")
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.DropDownListFor(model => model.Country, new SelectList(ViewBag.CountriesList, "Value", "Text"), Resources.Resources.Select,
-              new { @class = "form-control", @onchange = "FillStates()" })
-        </div>
-    </div>
 
-    <div class="divRow">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.State, Resources.Resources.State)
+        <div class="divRow">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Region, Resources.Resources.Region)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("CitiesList")
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.DropDownList("StatesList")
-            @Html.ValidationMessageFor(model => model.State)
-        </div>
-    </div>
 
-    <div class="divRow">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Region, Resources.Resources.Region)
+        <div class="divRow">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SubRegion, Resources.Resources.SubRegion)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.SubRegion)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.DropDownList("CitiesList")
-            @Html.ValidationMessageFor(model => model.Region)
-        </div>
-    </div>
 
-    <div class="divRow">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SubRegion, Resources.Resources.SubRegion)
+        <div class="divRow">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.TimeZone, Resources.Resources.TimeZone)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.TimeZone, new SelectList(ViewBag.TimeZonesList, "Value", "Text"), Resources.Resources.Select,
+                                new { @class = "form-control" })
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SubRegion)
-            @Html.ValidationMessageFor(model => model.SubRegion)
-        </div>
-    </div>
 
-    <div class="divRow">
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TimeZone, Resources.Resources.TimeZone)
+        <div align="center"><input id="btn_Register" type="submit" value="@Resources.Resources.CreateAccount" /></div>
+        <div id="updateME" align="center"></div>
+        <div id="loader" align="center"><img class="ajaxLoader" /></div>
+        <br />
+        <div align="center">
+            @Html.ActionLink(Resources.Resources.BackLogin, "Login", "Login",
+                    new
+                    {
+                        lang = HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
+                            ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : ""
+                    }, new { @class = "linkButton" })
         </div>
-        <div class="editor-field">
-            @Html.DropDownListFor(model => model.TimeZone, new SelectList(ViewBag.TimeZonesList, "Value", "Text"), Resources.Resources.Select,
-                     new { @class = "form-control" })
-        </div>
-    </div>
+        <br />
+    </fieldset>
 
-    <p>
-        <input id="btn_Register" type="submit" value="@Resources.Resources.CreateAccount" />
-    </p>
-    <div id="updateME" align="center"></div>
-    <div id="loader" align="center"><img class="ajaxLoader" /></div>
-    <br />
-</fieldset>
 }
 
 
 @Html.Hidden("hf_lang", HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
             ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : "")
-<div>
-    @Html.ActionLink(Resources.Resources.BackLogin, "Home", "Login",
-    new
-    {
-        lang = HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
-            ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : ""
-    }, null)
-</div>
 
 @section Scripts 
 {
-<script>
+    <script>
 
-$("#StatesList").change(FillCities);
-function FillStates()
-{
-    var country = $('#Country').val();
-    var selectedLang = document.getElementById('hf_lang').value;
-    $.ajax({
-    url: '/Login/GetStates',
-    type: "GET",
-    dataType: "JSON",
-    data: {
-            lang: selectedLang, countryid: country
-    },
-    success: function (data) {
-        $("#StatesList").html(""); // clear before appending new list
-        $.each(data, function (i, state) {
-            $("#StatesList").append(
-                $('<option></option>').val(state.StateID).html(state.Name));
-        });
-    },
-    error: function ajaxError(response) {
-        alert(response.status + ' ' + response.statusText);
-    }
-    });
-}
-
-function FillCities()
-{
-    var state = $('#StatesList').val();
-    var selectedLang = document.getElementById('hf_lang').value;
-    $.ajax({
-        url: '/Login/GetCities',
-        type: "GET",
-        dataType: "JSON",
-        data: {
-            lang: selectedLang, stateid: state
-        },
-        success: function (data) {
-            $("#CitiesList").html(""); // clear before appending new list
-            $.each(data, function (i, city) {
-                $("#CitiesList").append(
-                    $('<option></option>').val(city.CityID).html(city.Name));
+        $("#StatesList").change(FillCities);
+        function FillStates() {
+            var country = $('#Country').val();
+            var selectedLang = document.getElementById('hf_lang').value;
+            $.ajax({
+                url: '/Login/GetStates',
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    lang: selectedLang, countryid: country
+                },
+                success: function (data) {
+                    $("#StatesList").html(""); // clear before appending new list
+                    $.each(data, function (i, state) {
+                        $("#StatesList").append(
+                            $('<option></option>').val(state.StateID).html(state.Name));
+                    });
+                },
+                error: function ajaxError(response) {
+                    alert(response.status + ' ' + response.statusText);
+                }
             });
-        },
-        error: function ajaxError(response) {
-            alert(response.status + ' ' + response.statusText);
         }
-    });
-}
 
-function onbegin()
-{
-    $(".ajaxLoader").css("display", "block");
-}
-function onsuccess()
-{
-    $(".ajaxLoader").css("display", "none");
-}
+        function FillCities() {
+            var state = $('#StatesList').val();
+            var selectedLang = document.getElementById('hf_lang').value;
+            $.ajax({
+                url: '/Login/GetCities',
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    lang: selectedLang, stateid: state
+                },
+                success: function (data) {
+                    $("#CitiesList").html(""); // clear before appending new list
+                    $.each(data, function (i, city) {
+                        $("#CitiesList").append(
+                            $('<option></option>').val(city.CityID).html(city.Name));
+                    });
+                },
+                error: function ajaxError(response) {
+                    alert(response.status + ' ' + response.statusText);
+                }
+            });
+        }
 
-</script>
+        function onbegin() {
+            $(".ajaxLoader").css("display", "block");
+        }
+        function onsuccess() {
+            $(".ajaxLoader").css("display", "none");
+        }
+
+        $(".fs_container :input").each(function () {
+            $("[data-val-length]").keyup(function () { return false });
+            $("[data-val-length-max]").keyup(function () { return false });
+            $("[data-val-length-min]").keyup(function () { return false });
+            $("[data-val-required]").keyup(function () { return false });
+            $("[data-val-equalto]").keyup(function () { return false });
+        });
+
+    </script>
 }

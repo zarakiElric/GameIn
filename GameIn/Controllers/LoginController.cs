@@ -13,20 +13,9 @@ namespace GameIn.Controllers
 
         List<SelectListItem> EmptyList = new List<SelectListItem>();
         SelectListItem emptyitem = new SelectListItem { Value = "", Text = App_GlobalResources.Resources.Select};
+        string ProfileLang = "/en";
 
         #region Views
-
-        /// <summary>
-        /// Default view from application
-        /// </summary>
-        /// <param name="lang">string</param>
-        /// <returns>ActionResult</returns>
-        /// Developer: Dan Palacios
-        /// Date: 30/11/17
-        public ActionResult Home(string lang)
-        {
-            return View();
-        }
 
         /// <summary>
         /// Get-View register for application
@@ -118,13 +107,13 @@ namespace GameIn.Controllers
             return View();
         }
 
-
+        [HttpPost]
         public ActionResult Login(Users LoginUser, string lang)
         {
 
             if(LoginIsValid(LoginUser.UserName, LoginUser.Password))
             {
-                return Json(new { url = Url.Action("../Logged/Profile") });
+                return Json(new { url = Url.Action("../Logged/Profile" + ProfileLang) });
                 //return View("~/Views/Logged/Profile.cshtml");
             }
             else
@@ -181,6 +170,17 @@ namespace GameIn.Controllers
                 Users UserReg = gEntity.Users.FirstOrDefault(users => users.UserName == username && users.Password == pwd);
                 if (UserReg != null)
                 {
+                    DateTime ServerDate = gEntity.Database.SqlQuery<DateTime>("Select GetUtcDate()").FirstOrDefault();
+                    UserReg.LastLogin = ServerDate;
+                    UserReg.LastIP = GetIPAddress();
+                    UserReg.LastUserAgent = Request.UserAgent;
+                    UserReg.ConfirmPassword = pwd;
+                    if(UserReg.Lang != (byte)Enums.Users.Lang.en_US)
+                    {
+                        ProfileLang = "/es";
+                    }
+                    gEntity.SaveChanges();
+
                     Session["User"] = UserReg;
                     return true;
                 }

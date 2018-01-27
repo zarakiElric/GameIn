@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="divRow">
+    @*<div class="divRow">
         <div class="editor-label">
             @Html.LabelFor(model => model.Password)
         </div>
@@ -49,7 +49,7 @@
             @Html.PasswordFor(model => model.ConfirmPassword)
             @Html.ValidationMessageFor(model => model.ConfirmPassword)
         </div>
-    </div>
+    </div>*@
 
     <div class="divRow">
         <div class="editor-label">
@@ -68,9 +68,9 @@
         <div class="editor-field-gender">
             @Html.DropDownList(Resources.Resources.Gender, new SelectList(new[]
               {
-    new { Value = "true", Text = @Resources.Resources.Male },
-    new { Value = "false", Text = @Resources.Resources.Female },
-}, "Value", "Text", Model)
+                    new { Value = "true", Text = @Resources.Resources.Male },
+                    new { Value = "false", Text = @Resources.Resources.Female },
+                }, "Value", "Text", Model)
               )
 
             @Html.ValidationMessageFor(model => model.Gender)
@@ -142,14 +142,61 @@
 
 @section Scripts
 {
-    <script>
+<script>
 function onbegin() {
-    $(".ajaxLoader").css("display", "block");
+$(".ajaxLoader").css("display", "block");
 }
 function onsuccess(result) {
-    if (result.url) { window.location.href = result.url }
-    $(".ajaxLoader").css("display", "none");
+if (result.url) { window.location.href = result.url }
+$(".ajaxLoader").css("display", "none");
+    }
+
+$("#StatesList").change(FillCities);
+function FillStates() {
+    var country = $('#Country').val();
+    var selectedLang = document.getElementById('hf_lang').value;
+    $.ajax({
+        url: '/Login/GetStates',
+        type: "GET",
+        dataType: "JSON",
+        data: {
+            lang: selectedLang, countryid: country
+        },
+        success: function (data) {
+            $("#StatesList").html(""); // clear before appending new list
+            $.each(data, function (i, state) {
+                $("#StatesList").append(
+                    $('<option></option>').val(state.StateID).html(state.Name));
+            });
+        },
+        error: function ajaxError(response) {
+            alert(response.status + ' ' + response.statusText);
+        }
+    });
 }
-    </script>
+
+function FillCities() {
+    var state = $('#StatesList').val();
+    var selectedLang = document.getElementById('hf_lang').value;
+    $.ajax({
+        url: '/Login/GetCities',
+        type: "GET",
+        dataType: "JSON",
+        data: {
+            lang: selectedLang, stateid: state
+        },
+        success: function (data) {
+            $("#CitiesList").html(""); // clear before appending new list
+            $.each(data, function (i, city) {
+                $("#CitiesList").append(
+                    $('<option></option>').val(city.CityID).html(city.Name));
+            });
+        },
+        error: function ajaxError(response) {
+            alert(response.status + ' ' + response.statusText);
+        }
+    });
+}
+</script>
 }
 

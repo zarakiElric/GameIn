@@ -46,7 +46,7 @@ namespace GameIn.Models
 
         public byte? Country { get; set; }
         public int? State { get; set; }
-        public int? Region { get; set; }
+        public Int64? Region { get; set; }
 
         [StringLength(200, MinimumLength = 0, ErrorMessageResourceName = "MaxPassed", ErrorMessageResourceType = typeof(Resources))]
         public string SubRegion { get; set; }

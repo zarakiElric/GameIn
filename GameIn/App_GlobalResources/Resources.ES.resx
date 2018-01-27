@@ -222,4 +222,10 @@
   <data name="Username" xml:space="preserve">
     <value>Usuario</value>
   </data>
+  <data name="UserUpdated" xml:space="preserve">
+    <value>Usuario actualizado correctamente.</value>
+  </data>
+  <data name="NewAccount" xml:space="preserve">
+    <value>Nueva cuenta</value>
+  </data>
 </root>

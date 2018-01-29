@@ -28,7 +28,7 @@ namespace GameIn.Controllers
         /// <param name="UserID">int?</param>
         /// Developer: Dan Palacios
         /// Date: 13/12/17
-        public void AppLog(string EMethod, string EClass, Exception ex, int UserID = 0)
+        public void AppLog(string EMethod, string EClass, Exception ex, long UserID = 0)
         {
             try
             {

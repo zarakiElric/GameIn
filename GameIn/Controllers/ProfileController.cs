@@ -9,11 +9,16 @@ using System.Web.Mvc;
 
 namespace GameIn.Controllers
 {
-    public class LoggedController : BaseController
+    public class LoggedController : LoggedBaseController
     {
 
         List<SelectListItem> EmptyList = new List<SelectListItem>();
         SelectListItem emptyitem = new SelectListItem { Value = "", Text = App_GlobalResources.Resources.Select };
+
+        public ActionResult Home(string lang)
+        {
+            return View();
+        }
 
         //
         // GET: /Logged/
@@ -98,7 +103,8 @@ namespace GameIn.Controllers
             }
             catch(Exception ex)
             {
-                AppLog("RegisterUser", "LoginController.cs", ex);
+                long UserID = Session["User"] != null && Session["User"].ToString() != string.Empty ? ((Users)Session["User"]).ID : 0;
+                AppLog("RegisterUser", "LoginController.cs", ex, UserID);
                 return Content(App_GlobalResources.Resources.GeneralError, "text/html");
             }
 
@@ -132,9 +138,10 @@ namespace GameIn.Controllers
                         Userdb.ConfirmPassword = Profile.ConfirmPassword;
                         Userdb.Lang = Request.RequestContext.RouteData.Values["Lang"] != null && 
                                 Request.RequestContext.RouteData.Values["Lang"].ToString() != string.Empty && 
-                                Request.RequestContext.RouteData.Values["Lang"].ToString() == "es-MX" ? 
+                                Request.RequestContext.RouteData.Values["Lang"].ToString() == "es" ? 
                                 (byte)Enums.Users.Lang.es_MX : (byte)Enums.Users.Lang.en_US;
                         gEntity.SaveChanges();
+                        Session["User"] = Userdb;
                     }
                     else
                     {
@@ -143,7 +150,8 @@ namespace GameIn.Controllers
                 }
                 catch (Exception ex)
                 {
-                    AppLog("RegisterUser", "LoginController.cs", ex);
+                    long UserID = Session["User"] != null && Session["User"].ToString() != string.Empty ? ((Users)Session["User"]).ID : 0;
+                    AppLog("RegisterUser", "LoginController.cs", ex, UserID);
                     return Content(App_GlobalResources.Resources.GeneralError, "text/html");
                 }
 

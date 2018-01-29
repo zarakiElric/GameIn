@@ -178,3 +178,14 @@ input[type="submit"] {
 input[type="submit"]:hover {
     opacity: 0.8;
 }
+
+.menuimg {
+    background-image: url(imgBlue/menu.png);
+    background-size:40px;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+}
+
+.menuToolbar{cursor:pointer;}
+.menuToolbar:hover{background-color:#5d6bb9;color:#e4e7fc;}

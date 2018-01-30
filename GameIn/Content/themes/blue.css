@@ -12,11 +12,12 @@ header, footer, nav, section {
 .divRow {
     display:table-row;
     padding:10px;
+    text-align:left;
 }
 
 .divRow div {
     display: table-cell;
-    padding: 3px;
+    padding: 5px;
 }
 
 .editor-label{color:#3c3c3c}
@@ -187,5 +188,7 @@ input[type="submit"]:hover {
     height: 40px;
 }
 
-.menuToolbar{cursor:pointer;}
+.menuToolbar{cursor:pointer;text-align:right;padding-right:15px;}
 .menuToolbar:hover{background-color:#5d6bb9;color:#e4e7fc;}
+.header {border-bottom: 2px solid #3c3c3c;}
+.headerLogged > td{border-bottom: 2px solid #3c3c3c;}

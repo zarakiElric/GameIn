@@ -10,6 +10,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+<div align="center">
     <fieldset class="fs_container">
         <legend>@Resources.Resources.Register</legend>
 
@@ -79,11 +80,11 @@
             </div>
             <div class="editor-field-gender">
                 @Html.DropDownList(Resources.Resources.Gender, new SelectList(new[]
-                 {
+                      {
                         new { Value = "true", Text = @Resources.Resources.Male },
                         new { Value = "false", Text = @Resources.Resources.Female },
                         }, "Value", "Text", Model)
-                 )
+                      )
             </div>
             <div class="editor-field">
                 @Html.ValidationMessageFor(model => model.Gender)
@@ -97,7 +98,7 @@
             </div>
             <div class="editor-field">
                 @Html.DropDownListFor(model => model.Country, new SelectList(ViewBag.CountriesList, "Value", "Text"), Resources.Resources.Select,
-                        new { @class = "form-control", @onchange = "FillStates()" })
+                             new { @class = "form-control", @onchange = "FillStates()" })
             </div>
         </div>
 
@@ -134,25 +135,24 @@
             </div>
             <div class="editor-field">
                 @Html.DropDownListFor(model => model.TimeZone, new SelectList(ViewBag.TimeZonesList, "Value", "Text"), Resources.Resources.Select,
-                                new { @class = "form-control" })
+                                     new { @class = "form-control" })
             </div>
         </div>
-
+        <br />
         <div align="center"><input id="btn_Register" type="submit" value="@Resources.Resources.CreateAccount" /></div>
         <div id="updateME" align="center"></div>
         <div id="loader" align="center"><img class="ajaxLoader" /></div>
         <br />
         <div align="center">
             @Html.ActionLink(Resources.Resources.BackLogin, "Login", "Login",
-                    new
-                    {
-                        lang = HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
-                            ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : ""
-                    }, new { @class = "linkButton" })
+                         new
+                         {
+                             lang = HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"] != null
+                                 ? HttpContext.Current.Request.RequestContext.RouteData.Values["Lang"].ToString() : ""
+                         }, new { @class = "linkButton" })
         </div>
-        <br />
     </fieldset>
-
+</div>
 }
 
 

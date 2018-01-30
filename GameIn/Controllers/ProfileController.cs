@@ -94,7 +94,7 @@ namespace GameIn.Controllers
                 Profile.Password = Userdb.Password;
                 Profile.ConfirmPassword = Userdb.Password;
 
-                string ValueLang = lang == "es" ? "1" : "0";
+                string ValueLang = GetLang(lang).ToString();
                 ModelState.SetModelValue("Lang", new ValueProviderResult(ValueLang, ValueLang, CultureInfo.InvariantCulture));
 
                 ModelState["Password"].Errors.Clear();

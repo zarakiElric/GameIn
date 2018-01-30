@@ -8,7 +8,7 @@
 @using (Ajax.BeginForm("Login", new AjaxOptions { OnBegin = "onbegin", OnSuccess = "onsuccess", UpdateTargetId = "updateME" }))
 {
     @Html.AntiForgeryToken()
-    <div>
+    <div align="center">
         <fieldset class="fs_container">
             <legend>@Resources.Resources.Login</legend>
             <div class="divRow">

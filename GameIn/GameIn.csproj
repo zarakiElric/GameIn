@@ -203,6 +203,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\angular-material.min.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -340,6 +341,7 @@
     <Content Include="Views\Shared\LogLayout.cshtml" />
     <Content Include="Views\Logged\Profile.cshtml" />
     <Content Include="Views\Logged\Home.cshtml" />
+    <Content Include="Views\Logged\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

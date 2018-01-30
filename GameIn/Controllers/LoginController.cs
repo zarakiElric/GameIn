@@ -113,7 +113,7 @@ namespace GameIn.Controllers
 
             if(LoginIsValid(LoginUser.UserName, LoginUser.Password))
             {
-                return Json(new { url = Url.Action("../Logged/Profile" + ProfileLang) });
+                return Json(new { url = Url.Action("../Logged/Home" + ProfileLang) });
                 //return View("~/Views/Logged/Profile.cshtml");
             }
             else

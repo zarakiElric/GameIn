@@ -165,5 +165,18 @@ namespace GameIn.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Accounts(string lang)
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SaveAccounts(string lang)
+        {
+
+            return View();
+        }
     }
 }

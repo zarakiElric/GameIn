@@ -187,6 +187,15 @@ namespace GameIn.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linked accounts.
+        /// </summary>
+        public static string LinkedAccounts {
+            get {
+                return ResourceManager.GetString("LinkedAccounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {

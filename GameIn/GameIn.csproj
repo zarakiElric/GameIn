@@ -145,13 +145,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BaseController.Security.cs">
       <DependentUpon>BaseController.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\LoggedBaseController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Enums\Users.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -342,6 +343,7 @@
     <Content Include="Views\Logged\Profile.cshtml" />
     <Content Include="Views\Logged\Home.cshtml" />
     <Content Include="Views\Logged\Menu.cshtml" />
+    <Content Include="Views\Logged\Accounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

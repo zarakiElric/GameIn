@@ -228,4 +228,7 @@
   <data name="NewAccount" xml:space="preserve">
     <value>New account</value>
   </data>
+  <data name="LinkedAccounts" xml:space="preserve">
+    <value>Linked accounts</value>
+  </data>
 </root>
